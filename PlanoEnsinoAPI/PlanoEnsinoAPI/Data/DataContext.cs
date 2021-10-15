@@ -53,7 +53,9 @@ namespace PlanoEnsinoAPI.Data
                 .Property(p => p.CdDisciplina).ValueGeneratedOnAdd();
 
             builder.Entity<SugestaoPlanoEnsino>()
-            .HasNoKey();
+            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
+            .WithOne(p => p.SugestaoPlanoEnsino)
+            .HasForeignKey<SugestaoPlanoEnsino>(s => s.CdDisciplina);
 
 
             //  builder.Entity<SugestaoPlanoEnsino>().HasOne(spe => spe.).WithMany(b => b.).HasForeignKey(bc => bc.LivroId);
