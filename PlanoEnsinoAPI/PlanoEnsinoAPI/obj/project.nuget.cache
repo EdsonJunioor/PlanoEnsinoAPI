@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pFcgrqdLrEm37KsZQS0NcrZmrNp/lbrfRwThxNdRiAPLw9ZYgPEwdFFKDd1hu3Sa2SliCBL9ivfR0fNp+7ksJw==",
+  "dgSpecHash": "eejnAmUcDoDKbwp7UgLT88lYT/1rIUOuSdt6sJasx9vofItozbygEIILtLxfJQJVzESvhJ3LSrEI02O4s/FmCQ==",
   "success": true,
-  "projectFilePath": "E:\\Projetos\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+  "projectFilePath": "E:\\Projects\\TCC_PlanoEnsino\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Edson Junior\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Edson Junior\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
