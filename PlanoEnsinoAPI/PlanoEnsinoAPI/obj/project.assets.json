@@ -5723,24 +5723,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Edson Junior\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\edson\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\TCC_PlanoEnsino\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "projectUniqueName": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
       "projectName": "PlanoEnsinoAPI",
-      "projectPath": "E:\\Projects\\TCC_PlanoEnsino\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
-      "packagesPath": "C:\\Users\\Edson Junior\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\TCC_PlanoEnsino\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
+      "projectPath": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
+      "outputPath": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Edson Junior\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
