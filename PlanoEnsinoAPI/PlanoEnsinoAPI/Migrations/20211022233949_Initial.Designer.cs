@@ -10,8 +10,8 @@ using PlanoEnsinoAPI.Data;
 namespace PlanoEnsinoAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211015014714_InicialDB")]
-    partial class InicialDB
+    [Migration("20211022233949_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,11 @@ namespace PlanoEnsinoAPI.Migrations
 
             modelBuilder.Entity("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", b =>
                 {
+                    b.Property<int>("CdSugestaoPlanoEnsino")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("AnoSemestre")
                         .HasColumnType("nvarchar(max)");
 
@@ -329,6 +334,11 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("CdSugestaoPlanoEnsino");
+
+                    b.HasIndex("CdDisciplina")
+                        .IsUnique();
+
                     b.ToTable("SugestaoPlanoEnsino");
                 });
 
@@ -363,6 +373,15 @@ namespace PlanoEnsinoAPI.Migrations
                     b.HasKey("CdUsuario");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", b =>
+                {
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
+                        .WithOne("SugestaoPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", "CdDisciplina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

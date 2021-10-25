@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlanoEnsinoAPI.Migrations
 {
-    public partial class InicialDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace PlanoEnsinoAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CdDisciplina = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
-                    Peso = table.Column<decimal>(nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DsAluno = table.Column<string>(nullable: true),
                     DsConsulta = table.Column<string>(nullable: true),
                     DsAvaliacao = table.Column<string>(nullable: true),
@@ -115,9 +115,30 @@ namespace PlanoEnsinoAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    CdUsuario = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: true),
+                    Senha = table.Column<string>(nullable: true),
+                    Sexo = table.Column<string>(nullable: true),
+                    DtNascimento = table.Column<DateTime>(nullable: false),
+                    TpUsuario = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.CdUsuario);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SugestaoPlanoEnsino",
                 columns: table => new
                 {
+                    CdSugestaoPlanoEnsino = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CdDisciplina = table.Column<int>(nullable: false),
                     DsDisciplina = table.Column<string>(nullable: true),
                     DsPlanoEnsino = table.Column<string>(nullable: true),
@@ -156,32 +177,20 @@ namespace PlanoEnsinoAPI.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_SugestaoPlanoEnsino", x => x.CdSugestaoPlanoEnsino);
                     table.ForeignKey(
-                        name: "FK_SugestaoPlanoEnsino",
+                        name: "FK_SugestaoPlanoEnsino_PlanoEnsino_CdDisciplina",
                         column: x => x.CdDisciplina,
                         principalTable: "PlanoEnsino",
                         principalColumn: "CdDisciplina",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Usuario",
-                columns: table => new
-                {
-                    CdUsuario = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
-                    Login = table.Column<string>(nullable: true),
-                    Senha = table.Column<string>(nullable: true),
-                    Sexo = table.Column<string>(nullable: true),
-                    DtNascimento = table.Column<DateTime>(nullable: false),
-                    TpUsuario = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuario", x => x.CdUsuario);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_SugestaoPlanoEnsino_CdDisciplina",
+                table: "SugestaoPlanoEnsino",
+                column: "CdDisciplina",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -199,13 +208,13 @@ namespace PlanoEnsinoAPI.Migrations
                 name: "Livro");
 
             migrationBuilder.DropTable(
-                name: "PlanoEnsino");
-
-            migrationBuilder.DropTable(
                 name: "SugestaoPlanoEnsino");
 
             migrationBuilder.DropTable(
                 name: "Usuario");
+
+            migrationBuilder.DropTable(
+                name: "PlanoEnsino");
         }
     }
 }

@@ -34,6 +34,9 @@ namespace PlanoEnsinoAPI.Data
             builder.Entity<Avaliacao>()
                 .Property(a => a.CdAvaliacao).ValueGeneratedOnAdd();
 
+            builder.Entity<Avaliacao>()
+                .Property(a => a.Peso).HasColumnType("decimal(18,2)");
+
             builder.Entity<Curso>()
              .HasKey(c => c.CdCurso);
 
@@ -51,6 +54,9 @@ namespace PlanoEnsinoAPI.Data
 
             builder.Entity<PlanoEnsino>()
                 .Property(p => p.CdDisciplina).ValueGeneratedOnAdd();
+
+            builder.Entity<SugestaoPlanoEnsino>()
+            .HasKey(p => p.CdSugestaoPlanoEnsino);
 
             builder.Entity<SugestaoPlanoEnsino>()
             .HasOne<PlanoEnsino>(s => s.PlanoEnsino)

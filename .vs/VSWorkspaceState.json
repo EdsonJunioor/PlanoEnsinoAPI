@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PlanoEnsinoAPI",
+    "\\PlanoEnsinoAPI\\PlanoEnsinoAPI",
+    "\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\Data"
   ],
+  "SelectedNode": "\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\Data\\DataContext.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -9,7 +9,7 @@ namespace PlanoEnsinoAPI.Models
 {
     public class SugestaoPlanoEnsino
     {
-        //public int CdSugestaoPlanoEnsino { get; set; }
+        public int CdSugestaoPlanoEnsino { get; set; }
         public int CdDisciplina { get; set; }          //FK de plano de ensino
         public string DsDisciplina { get; set; }       
         public string DsPlanoEnsino { get; set; }
