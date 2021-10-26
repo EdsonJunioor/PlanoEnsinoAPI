@@ -103,8 +103,6 @@ namespace PlanoEnsinoAPI.Migrations
                     Nome = table.Column<string>(nullable: true),
                     Login = table.Column<string>(nullable: true),
                     Senha = table.Column<string>(nullable: true),
-                    Sexo = table.Column<string>(nullable: true),
-                    DtNascimento = table.Column<DateTime>(nullable: false),
                     TpUsuario = table.Column<string>(nullable: true),
                     Status = table.Column<string>(nullable: true)
                 },

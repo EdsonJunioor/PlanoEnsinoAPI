@@ -398,9 +398,6 @@ namespace PlanoEnsinoAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DtNascimento")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(max)");
 
@@ -408,9 +405,6 @@ namespace PlanoEnsinoAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
