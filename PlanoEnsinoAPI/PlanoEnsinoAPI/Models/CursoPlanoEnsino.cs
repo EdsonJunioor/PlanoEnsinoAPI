@@ -7,6 +7,7 @@ namespace PlanoEnsinoAPI.Models
 {
     public class CursoPlanoEnsino
     {
+        public int CdCursoPlanoEnsino { get; set; }
         public int CdCurso { get; set; }
         public int CdDisciplina { get; set; }
         public Curso Curso { get; set; }
@@ -14,8 +15,9 @@ namespace PlanoEnsinoAPI.Models
 
         public CursoPlanoEnsino() { }                //construtor vazio para não bugar e precisar do NEWTONSOFT
 
-        public CursoPlanoEnsino(int Curso, int Disciplina)
+        public CursoPlanoEnsino(int CursoPlanoEnsino, int Curso, int Disciplina)
         {
+            CdCursoPlanoEnsino = CursoPlanoEnsino;
             CdCurso = Curso;
             CdDisciplina = Disciplina;
         }

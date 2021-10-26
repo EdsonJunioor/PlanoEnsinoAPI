@@ -5728,11 +5728,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "projectUniqueName": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
       "projectName": "PlanoEnsinoAPI",
-      "projectPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "projectPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
       "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
+      "outputPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config",

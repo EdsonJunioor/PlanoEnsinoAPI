@@ -9,7 +9,7 @@ namespace PlanoEnsinoAPI.Models
     {
         public int CdAutor { get; set; }
         public string Nome { get; set; }
-
+        public LivroAutor LivroAutor {  get; set; }
         public Autor()  { }     //construtor vazio para não bugar e precisar do NEWTONSOFT
 
         public Autor(int cdAutor, string nome)

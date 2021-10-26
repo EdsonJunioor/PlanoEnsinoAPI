@@ -44,6 +44,8 @@ namespace PlanoEnsinoAPI.Models
         public DateTime DtAtualização { get; set; }
         public SugestaoPlanoEnsino SugestaoPlanoEnsino { get; set; }
         public Avaliacao Avaliacao { get; set; }
+        public CursoPlanoEnsino CursoPlanoEnsino { get; set; }
+        public UsuarioPlanoEnsino UsuarioPlanoEnsino { get; set; }
 
         public PlanoEnsino() { }    //construtor vazio para não bugar e precisar do NEWTONSOFT
 

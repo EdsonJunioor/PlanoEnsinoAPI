@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tu0dmJdaPrvFghuOi87xBdX0UHXTo1AcH+9rMCQ6gA2jq3pv0gtFDafl4RvUGIiQIzhf/VXzh4qwLqvkimLgIA==",
+  "dgSpecHash": "Y/0EWJA1uikoomNN6ZNcXNZje25+IHrZVYYFR9J+JHRgYtUSB/KLzyq9PAujlwKKPzAF6w4Amv2tiljAWjm7Kw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+  "projectFilePath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felip\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\felip\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",

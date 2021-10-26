@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace PlanoEnsinoAPI.Models
 {
     public class LivroAutor
-    {
+    {   
+        public int CdLivroAutor { get; set; }
         public int CdLivro { get; set; }
         public int CdAutor { get; set; }
         public Livro Livro { get; set; }
@@ -14,8 +15,9 @@ namespace PlanoEnsinoAPI.Models
 
         public LivroAutor() { }                //construtor vazio para não bugar e precisar do NEWTONSOFT
 
-        public LivroAutor(int Livro, int Autor)
-        {
+        public LivroAutor(int LivroAutor, int Livro, int Autor)
+        {   
+            CdLivroAutor = LivroAutor;
             CdLivro = Livro;
             CdAutor = Autor;
         }
