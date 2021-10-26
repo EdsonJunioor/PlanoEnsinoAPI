@@ -35,7 +35,13 @@ namespace PlanoEnsinoAPI.Data
                 .Property(a => a.CdAvaliacao).ValueGeneratedOnAdd();
 
             builder.Entity<Avaliacao>()
-                .Property(a => a.Peso).HasColumnType("decimal(18,2)");
+            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
+            .WithOne(p => p.Avaliacao)
+            .HasForeignKey<Avaliacao>(s => s.CdDisciplina);
+
+            builder.Entity<Avaliacao>()
+                .Property(a => a.Peso)
+                .HasColumnType("decimal(18,2)");
 
             builder.Entity<Curso>()
              .HasKey(c => c.CdCurso);
@@ -59,24 +65,12 @@ namespace PlanoEnsinoAPI.Data
             .HasKey(p => p.CdSugestaoPlanoEnsino);
 
             builder.Entity<SugestaoPlanoEnsino>()
+            .Property(p => p.CdSugestaoPlanoEnsino).ValueGeneratedOnAdd();
+
+            builder.Entity<SugestaoPlanoEnsino>()
             .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
             .WithOne(p => p.SugestaoPlanoEnsino)
             .HasForeignKey<SugestaoPlanoEnsino>(s => s.CdDisciplina);
-
-
-            //  builder.Entity<SugestaoPlanoEnsino>().HasOne(spe => spe.).WithMany(b => b.).HasForeignKey(bc => bc.LivroId);
-
-
-            //  modelBuilder.Entity<LivroAutor>()
-            //.HasOne(bc => bc.Livro)
-            // .WithMany(b => b.LivrosAutores)
-            //  .HasForeignKey(bc => bc.LivroId);
-
-            //modelBuilder.Entity<LivroAutor>()
-            //    .HasOne(bc => bc.Autor)
-            //    .WithMany(c => c.LivrosAutores)
-            //     .HasForeignKey(bc => bc.AutorId);
-
 
             builder.Entity<Usuario>()
                  .HasKey(u => u.CdUsuario);
