@@ -16,7 +16,6 @@ namespace PlanoEnsinoAPI.Models
         public string DsAvaliacao { get; set; }
         public string DsConteudo { get; set; }
         public string DsObservacao { get; set; }
-        public PlanoEnsino PlanoEnsino { get; set; }
 
         public Avaliacao() { }       //construtor vazio para não bugar e precisar do NEWTONSOFT
 
