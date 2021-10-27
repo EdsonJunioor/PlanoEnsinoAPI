@@ -10,6 +10,7 @@ namespace PlanoEnsinoAPI.Models
         public int CdCurso { get; set; }
         public string DsCurso { get; set; }
         public string TpGraduacao { get; set; }
+        public CursoPlanoEnsino CursoPlanoEnsino { get; set; }
 
         public Curso() { }      //construtor vazio para não bugar e precisar do NEWTONSOFT
 

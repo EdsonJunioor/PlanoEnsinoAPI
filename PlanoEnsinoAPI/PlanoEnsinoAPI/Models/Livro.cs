@@ -11,6 +11,7 @@ namespace PlanoEnsinoAPI.Models
         public string DsLivro { get; set; }
         public string Editora { get; set; }
         public int Ano { get; set; }
+        public LivroAutor LivroAutor { get; set; }
 
         public Livro() { }      //construtor vazio para não bugar e precisar do NEWTONSOFT
 

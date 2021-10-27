@@ -7,7 +7,7 @@ namespace PlanoEnsinoAPI.Models
 {
     public class PlanoEnsino
     {
-       
+
         public int CdDisciplina { get; set; }       //PK de plano de ensino
         public string DsDisciplina { get; set; }
         public int NrCreditos { get; set; }
@@ -42,8 +42,10 @@ namespace PlanoEnsinoAPI.Models
         public string DsSemana20 { get; set; }
         public string Status { get; set; }
         public DateTime DtAtualização { get; set; }
-
         public SugestaoPlanoEnsino SugestaoPlanoEnsino { get; set; }
+        public Avaliacao Avaliacao { get; set; }
+        public CursoPlanoEnsino CursoPlanoEnsino { get; set; }
+        public UsuarioPlanoEnsino UsuarioPlanoEnsino { get; set; }
 
         public PlanoEnsino() { }    //construtor vazio para não bugar e precisar do NEWTONSOFT
 
