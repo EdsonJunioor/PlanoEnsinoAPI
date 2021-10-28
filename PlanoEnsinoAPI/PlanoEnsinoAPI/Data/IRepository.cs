@@ -21,3 +21,6 @@ namespace PlanoEnsinoAPI.Data
 
     }
 }
+
+
+//Repository => Irepository => controller do obj

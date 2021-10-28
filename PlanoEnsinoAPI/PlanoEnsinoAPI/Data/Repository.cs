@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlanoEnsinoAPI.Data
+namespace PlanoEnsinoAPI.Data               //Repository => Irepository => controller do obj
 {
     public class Repository : IRepository
     {
@@ -14,6 +14,9 @@ namespace PlanoEnsinoAPI.Data
         {
             _context = context;
         }
+
+        //METÓDOS GLOBAIS
+
         public void Add<T>(T entity) where T : class
         {
             _context.Add(entity);
@@ -26,6 +29,9 @@ namespace PlanoEnsinoAPI.Data
         {
             _context.Remove(entity);
         }
+
+        //METÓDOS ESPECIFICOS PARA UM OBJETO
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;

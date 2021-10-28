@@ -5723,19 +5723,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\felip\\.nuget\\packages\\": {}
+    "C:\\Users\\edson\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "projectUniqueName": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
       "projectName": "PlanoEnsinoAPI",
-      "projectPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
-      "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felip\\Documents\\GitHub\\PlanoEnsinoAPI_teste\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
+      "projectPath": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\PlanoEnsinoAPI.csproj",
+      "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
+      "outputPath": "C:\\EdsonJunior\\TCC\\C#\\PlanoEnsinoAPI\\PlanoEnsinoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5796,7 +5796,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
