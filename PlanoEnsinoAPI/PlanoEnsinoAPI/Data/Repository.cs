@@ -37,6 +37,7 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             return (await _context.SaveChangesAsync()) > 0;
         }
 
+        //Usuario
         public async Task<Usuario[]> GetAllUsuarioAsync()
         {
             IQueryable<Usuario> query = _context.Usuario;
@@ -66,6 +67,98 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             return await query.FirstOrDefaultAsync();
         }
-       
+
+        //Livro
+        public async Task<Livro[]> GetAllLivroAsync()
+        {
+            IQueryable<Livro> query = _context.Livro;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livro => livro.DsLivro);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Livro> GetLivroByIdAsync(int id)
+        {
+            IQueryable<Livro> query = _context.Livro;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livro => livro)
+                         .Where(livro => livro.CdLivro == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Livro> GetLivroByNameAsync(string nome)
+        {
+            IQueryable<Livro> query = _context.Livro;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livro => livro)
+                         .Where(livro => livro.DsLivro == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Curso
+        public async Task<Curso[]> GetAllCursoAsync()
+        {
+            IQueryable<Curso> query = _context.Curso;
+
+            query = query.AsNoTracking()
+                         .OrderBy(curso => curso.DsCurso);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Curso> GetCursoByIdAsync(int id)
+        {
+            IQueryable<Curso> query = _context.Curso;
+
+            query = query.AsNoTracking()
+                         .OrderBy(curso => curso)
+                         .Where(curso => curso.CdCurso == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Curso> GetCursoByNameAsync(string nome)
+        {
+            IQueryable<Curso> query = _context.Curso;
+
+            query = query.AsNoTracking()
+                         .OrderBy(curso => curso)
+                         .Where(curso => curso.DsCurso == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Autor
+        public async Task<Autor[]> GetAllAutorAsync()
+        {
+            IQueryable<Autor> query = _context.Autor;
+
+            query = query.AsNoTracking()
+                         .OrderBy(autor => autor.Nome);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Autor> GetAutorByIdAsync(int id)
+        {
+            IQueryable<Autor> query = _context.Autor;
+
+            query = query.AsNoTracking()
+                         .OrderBy(autor => autor)
+                         .Where(autor => autor.CdAutor == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Autor> GetAutorByNameAsync(string nome)
+        {
+            IQueryable<Autor> query = _context.Autor;
+
+            query = query.AsNoTracking()
+                         .OrderBy(autor => autor)
+                         .Where(autor => autor.Nome == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }
