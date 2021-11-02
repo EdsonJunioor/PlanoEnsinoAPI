@@ -160,5 +160,37 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             return await query.FirstOrDefaultAsync();
         }
+
+        //Avaliacao
+        public async Task<Avaliacao[]> GetAllAvaliacaoAsync()
+        {
+            IQueryable<Avaliacao> query = _context.Avaliacao;
+
+            query = query.AsNoTracking()
+                         .OrderBy(avaliacao => avaliacao.CdAvaliacao);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Avaliacao> GetAvaliacaoByIdAsync(int id)
+        {
+            IQueryable<Avaliacao> query = _context.Avaliacao;
+
+            query = query.AsNoTracking()
+                         .OrderBy(avaliacao => avaliacao)
+                         .Where(avaliacao => avaliacao.CdAvaliacao == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Avaliacao> GetAvaliacaoByNameAsync(string nome)
+        {
+            IQueryable<Avaliacao> query = _context.Avaliacao;
+
+            query = query.AsNoTracking()
+                         .OrderBy(avaliacao => avaliacao)
+                         .Where(avaliacao => avaliacao.Nome == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

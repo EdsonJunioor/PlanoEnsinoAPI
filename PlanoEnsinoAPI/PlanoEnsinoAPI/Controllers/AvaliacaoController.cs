@@ -10,59 +10,58 @@ namespace PlanoEnsinoAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : ControllerBase
+    public class AvaliacaoController : ControllerBase
     {
         private readonly IRepository repository;
 
-        public UsuarioController(IRepository repository)
+        public AvaliacaoController(IRepository repository)
         {
             this.repository = repository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListarUsuarios()
+        public async Task<IActionResult> ListarAvaliacoes()
         {
-            var result = await this.repository.GetAllUsuarioAsync();
+            var result = await this.repository.GetAllAvaliacaoAsync();
             return Ok(result);
         }
 
-
         [HttpGet, Route("{id}")]
-        public async Task<IActionResult> BuscarUsuarioById(int id)
+        public async Task<IActionResult> BuscarAvaliacaoById(int id)
         {
             try
             {
-                var retorno = await this.repository.GetUsuarioByIdAsync(id);
-                
-                if(retorno != null)
+                var retorno = await this.repository.GetAvaliacaoByIdAsync(id);
+
+                if (retorno != null)
                 {
                     return Ok(retorno.Nome.ToLower());
                 }
                 else
                 {
-                    return NotFound("Usuário não encontrado.");
+                    return NotFound("Avaliacao não encontrada.");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest($"Usuário Erro:{ex.Message}");
+                return BadRequest($"Avalicao Erro:{ex.Message}");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CriarUsuario([FromBody] Usuario usuarioModel)
+        public async Task<IActionResult> CriarAvaliacao([FromBody] Avaliacao avalicaoModel)
         {
             try
             {
-                repository.Add(usuarioModel);
+                repository.Add(avalicaoModel);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(usuarioModel);
+                    return Ok(avalicaoModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar usúario.");
+                    return BadRequest("Erro ao salvar avaliacao.");
                 }
             }
             catch (Exception ex)
@@ -70,31 +69,30 @@ namespace PlanoEnsinoAPI.Controllers
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
-            
+
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarUsuario(int id, [FromBody]Usuario usuarioModel)
+        public async Task<IActionResult> EditarAvaliacao(int id, [FromBody] Avaliacao avaliacaoModel)
         {
             try
             {
-                var retorno = await repository.GetUsuarioByIdAsync(id);
+                var retorno = await repository.GetAvaliacaoByIdAsync(id);
 
-                if(retorno != null)
+                if (retorno != null)
                 {
-                    repository.Update(usuarioModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
+                    repository.Update(avaliacaoModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
                     await repository.SaveChangesAsync();
-                    return Ok("Usuário atualizado com sucesso.");
+                    return Ok("Avaliacao atualizada com sucesso.");
                 }
                 else
                 {
-                    return NotFound("Usuário não encontrado.");
+                    return NotFound("Avaliacao não encontrada.");
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
-
     }
 }
