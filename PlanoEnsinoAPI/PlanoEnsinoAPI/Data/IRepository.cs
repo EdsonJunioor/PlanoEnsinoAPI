@@ -33,6 +33,11 @@ namespace PlanoEnsinoAPI.Data
         Task<Autor[]> GetAllAutorAsync();
         Task<Autor> GetAutorByIdAsync (int autorCd);
         Task<Autor> GetAutorByNameAsync (string nome);
+
+        //GET Avaliacao
+        Task<Avaliacao[]> GetAllAvaliacaoAsync();
+        Task<Avaliacao> GetAvaliacaoByIdAsync(int avaliacaoCd);
+        Task<Avaliacao> GetAvaliacaoByNameAsync(string nome);
     }
 }
 //Repository => Irepository => controller do obj
