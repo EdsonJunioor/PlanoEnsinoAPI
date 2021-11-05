@@ -13,7 +13,8 @@ namespace PlanoEnsinoAPI.Models
         public string Senha { get; set; }
         public string TpUsuario { get; set; } //tipo de prof se é ADM, NDE ou comum
         public string Status { get; set; }
-        public UsuarioPlanoEnsino UsuarioPlanoEnsino { get; set; }
+
+        public ICollection<UsuarioPlanoEnsino> UsuarioPlanoEnsinos { get; set; }
 
         public Usuario() { }                //construtor vazio para não bugar e precisar do NEWTONSOFT
 

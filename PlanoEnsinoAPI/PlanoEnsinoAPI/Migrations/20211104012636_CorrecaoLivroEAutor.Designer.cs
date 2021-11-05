@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlanoEnsinoAPI.Data;
 
 namespace PlanoEnsinoAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211104012636_CorrecaoLivroEAutor")]
+    partial class CorrecaoLivroEAutor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,20 +95,24 @@ namespace PlanoEnsinoAPI.Migrations
 
             modelBuilder.Entity("PlanoEnsinoAPI.Models.CursoPlanoEnsino", b =>
                 {
+                    b.Property<int>("CdCursoPlanoEnsino")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("CdCurso")
                         .HasColumnType("int");
 
                     b.Property<int>("CdDisciplina")
                         .HasColumnType("int");
 
-                    b.Property<int>("CdCursoPlanoEnsino")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasKey("CdCursoPlanoEnsino");
 
-                    b.HasKey("CdCurso", "CdDisciplina");
+                    b.HasIndex("CdCurso")
+                        .IsUnique();
 
-                    b.HasIndex("CdDisciplina");
+                    b.HasIndex("CdDisciplina")
+                        .IsUnique();
 
                     b.ToTable("CursoPlanoEnsino");
                 });
@@ -372,15 +378,13 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<int>("NrHorasSala")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlanoEnsinoCdDisciplina")
-                        .HasColumnType("int");
-
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CdSugestaoPlanoEnsino");
 
-                    b.HasIndex("PlanoEnsinoCdDisciplina");
+                    b.HasIndex("CdDisciplina")
+                        .IsUnique();
 
                     b.ToTable("SugestaoPlanoEnsino");
                 });
@@ -414,20 +418,24 @@ namespace PlanoEnsinoAPI.Migrations
 
             modelBuilder.Entity("PlanoEnsinoAPI.Models.UsuarioPlanoEnsino", b =>
                 {
-                    b.Property<int>("CdUsuario")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CdDisciplina")
-                        .HasColumnType("int");
-
                     b.Property<int>("CdUsuarioPlanoEnsino")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("CdUsuario", "CdDisciplina");
+                    b.Property<int>("CdDisciplina")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CdDisciplina");
+                    b.Property<int>("CdUsuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("CdUsuarioPlanoEnsino");
+
+                    b.HasIndex("CdDisciplina")
+                        .IsUnique();
+
+                    b.HasIndex("CdUsuario")
+                        .IsUnique();
 
                     b.ToTable("UsuarioPlanoEnsino");
                 });
@@ -444,14 +452,14 @@ namespace PlanoEnsinoAPI.Migrations
             modelBuilder.Entity("PlanoEnsinoAPI.Models.CursoPlanoEnsino", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.Curso", "Curso")
-                        .WithMany("cursoPlanoEnsinos")
-                        .HasForeignKey("CdCurso")
+                        .WithOne("CursoPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.CursoPlanoEnsino", "CdCurso")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", null)
-                        .WithMany("CursoPlanoEnsinos")
-                        .HasForeignKey("CdDisciplina")
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
+                        .WithOne("CursoPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.CursoPlanoEnsino", "CdDisciplina")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -474,21 +482,23 @@ namespace PlanoEnsinoAPI.Migrations
             modelBuilder.Entity("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
-                        .WithMany()
-                        .HasForeignKey("PlanoEnsinoCdDisciplina");
+                        .WithOne("SugestaoPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", "CdDisciplina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PlanoEnsinoAPI.Models.UsuarioPlanoEnsino", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
-                        .WithMany("UsuarioPlanoEnsinos")
-                        .HasForeignKey("CdDisciplina")
+                        .WithOne("UsuarioPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.UsuarioPlanoEnsino", "CdDisciplina")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PlanoEnsinoAPI.Models.Usuario", "Usuario")
-                        .WithMany("UsuarioPlanoEnsinos")
-                        .HasForeignKey("CdUsuario")
+                        .WithOne("UsuarioPlanoEnsino")
+                        .HasForeignKey("PlanoEnsinoAPI.Models.UsuarioPlanoEnsino", "CdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -59,20 +59,14 @@ namespace PlanoEnsinoAPI.Data
              .Property(c => c.CdCursoPlanoEnsino).ValueGeneratedOnAdd();
 
             builder.Entity<CursoPlanoEnsino>()
-            .HasOne<Curso>(s => s.Curso)
-            .WithOne(p => p.CursoPlanoEnsino)
-            .HasForeignKey<CursoPlanoEnsino>(s => s.CdCurso);
-
-            builder.Entity<CursoPlanoEnsino>()
-            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
-            .WithOne(p => p.CursoPlanoEnsino)
-            .HasForeignKey<CursoPlanoEnsino>(s => s.CdDisciplina);
+                .HasKey(x => new { x.CdCurso, x.CdDisciplina });
 
             builder.Entity<Livro>()
              .HasKey(l => l.CdLivro);
 
             builder.Entity<Livro>()
                 .Property(l => l.CdLivro).ValueGeneratedOnAdd();
+
 
             builder.Entity<LivroAutor>()
              .HasKey(c => c.CdLivroAutor);
@@ -81,14 +75,7 @@ namespace PlanoEnsinoAPI.Data
              .Property(c => c.CdLivroAutor).ValueGeneratedOnAdd();
 
             builder.Entity<LivroAutor>()
-            .HasOne<Livro>(s => s.Livro)
-            .WithOne(p => p.LivroAutor)
-            .HasForeignKey<LivroAutor>(s => s.CdLivro);
-
-            builder.Entity<LivroAutor>()
-            .HasOne<Autor>(s => s.Autor)
-            .WithOne(p => p.LivroAutor)
-            .HasForeignKey<LivroAutor>(s => s.CdAutor);
+                .HasKey(la => new { la.CdLivro, la.CdAutor });
 
             builder.Entity<PlanoEnsino>()
             .HasKey(p => p.CdDisciplina);
@@ -101,11 +88,6 @@ namespace PlanoEnsinoAPI.Data
 
             builder.Entity<SugestaoPlanoEnsino>()
             .Property(p => p.CdSugestaoPlanoEnsino).ValueGeneratedOnAdd();
-
-            builder.Entity<SugestaoPlanoEnsino>()
-            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
-            .WithOne(p => p.SugestaoPlanoEnsino)
-            .HasForeignKey<SugestaoPlanoEnsino>(s => s.CdDisciplina);
 
             builder.Entity<Usuario>()
                  .HasKey(u => u.CdUsuario);
@@ -120,14 +102,7 @@ namespace PlanoEnsinoAPI.Data
             .Property(p => p.CdUsuarioPlanoEnsino).ValueGeneratedOnAdd();
 
             builder.Entity<UsuarioPlanoEnsino>()
-            .HasOne<Usuario>(s => s.Usuario)
-            .WithOne(p => p.UsuarioPlanoEnsino)
-            .HasForeignKey<UsuarioPlanoEnsino>(s => s.CdUsuario);
-
-            builder.Entity<UsuarioPlanoEnsino>()
-            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
-            .WithOne(p => p.UsuarioPlanoEnsino)
-            .HasForeignKey<UsuarioPlanoEnsino>(s => s.CdDisciplina);
+                .HasKey(x => new { x.CdUsuario, x.CdDisciplina });
         }
     }
 }

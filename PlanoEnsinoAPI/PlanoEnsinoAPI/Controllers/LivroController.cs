@@ -79,7 +79,7 @@ namespace PlanoEnsinoAPI.Controllers
 
                 if (retorno != null)
                 {
-                    repository.Update(livroModel);        
+                    repository.Update(livroModel);
                     await repository.SaveChangesAsync();
                     return Ok("Livro atualizado com sucesso.");
                 }
@@ -95,5 +95,27 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
+
+        [HttpPost, Route("livroAutor")]
+        public async Task<ActionResult> SalvarLivroAutor([FromBody] LivroAutor livroAutorModel)
+        {
+            try
+            {
+                repository.Add(livroAutorModel);
+
+                if (await repository.SaveChangesAsync())
+                {
+                    return Ok(livroAutorModel);
+                }
+                else
+                {
+                    return BadRequest("Erro ao salvar CdLivro e CdAutor.");
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Erro:{e.Message}");
+            }
+        }
     }
 }
