@@ -104,8 +104,12 @@ StyleCopReport.xml
 *.runtimeconfig.dev.json
 *.gdspec.json
 *.cache
+*.assets.cache
+*.csproj
 *.props
 *.targets
+*.txt
+*.suo
 
 # Chutzpah Test files
 _Chutzpah*
