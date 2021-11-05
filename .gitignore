@@ -33,6 +33,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+[Vv]16/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -211,6 +212,9 @@ PublishScripts/
 *.snupkg
 # The packages folder can be ignored because of Package Restore
 **/[Pp]ackages/*
+
+
+
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
