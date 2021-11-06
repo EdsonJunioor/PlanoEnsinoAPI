@@ -68,6 +68,18 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             return await query.FirstOrDefaultAsync();
         }
 
+        //Login
+        public async Task<Usuario> GetUsuarioByEmailAsync(string email)
+        {
+            IQueryable<Usuario> query = _context.Usuario;
+
+            query = query.AsNoTracking()
+                         .OrderBy(usuario => usuario)
+                         .Where(usuario => usuario.Login == email);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Livro
         public async Task<Livro[]> GetAllLivroAsync()
         {

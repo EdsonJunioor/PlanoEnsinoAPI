@@ -26,7 +26,6 @@ namespace PlanoEnsinoAPI.Controllers
             return Ok(result);
         }
 
-
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> BuscarUsuarioById(int id)
         {
@@ -63,6 +62,41 @@ namespace PlanoEnsinoAPI.Controllers
                 else
                 {
                     return BadRequest("Erro ao salvar usúario.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro:{ex.Message}");
+            }
+        }
+
+        [HttpGet, Route("testelogin")]
+        public async Task<IActionResult> BuscarUsuarioPeloLogin([FromBody] Usuario usuarioModel)
+        {
+            try
+            {
+                var usuarioRetornado = await this.repository.GetUsuarioByEmailAsync(usuarioModel.Login);
+                if(usuarioRetornado != null)
+                {
+                    if (usuarioRetornado.Login == usuarioModel.Login)
+                    {
+                        if(usuarioRetornado.Senha == usuarioModel.Senha)
+                        {
+                            return Ok(usuarioRetornado);
+                        }
+                        else
+                        {
+                            return NotFound("Senha incorreta.");
+                        }
+                    }
+                    else
+                    {
+                        return NotFound("Login incorreta.");
+                    }
+                }
+                else
+                {
+                    return NotFound("Usuário não encontrado.");
                 }
             }
             catch (Exception ex)

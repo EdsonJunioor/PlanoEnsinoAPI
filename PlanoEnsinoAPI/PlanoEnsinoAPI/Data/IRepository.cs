@@ -19,6 +19,9 @@ namespace PlanoEnsinoAPI.Data
         Task<Usuario> GetUsuarioByIdAsync (int usuarioCd);
         Task<Usuario> GetUsuarioByNameAsync (string nome);
 
+        //Login
+        Task<Usuario> GetUsuarioByEmailAsync(string email);
+
         //GET Livro
         Task<Livro[]> GetAllLivroAsync ();
         Task<Livro> GetLivroByIdAsync (int livroCd);

@@ -7,7 +7,6 @@ namespace PlanoEnsinoAPI.Models
 {
     public class PlanoEnsino
     {
-
         public int CdDisciplina { get; set; }       //PK de plano de ensino
         public string DsDisciplina { get; set; }
         public int NrCreditos { get; set; }

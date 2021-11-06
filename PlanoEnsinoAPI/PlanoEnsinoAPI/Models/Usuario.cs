@@ -9,7 +9,7 @@ namespace PlanoEnsinoAPI.Models
     {
         public int CdUsuario { get; set; }
         public string Nome { get; set; }
-        public string Login { get; set; }
+        public string Login { get; set; } //Email
         public string Senha { get; set; }
         public string TpUsuario { get; set; } //tipo de prof se é ADM, NDE ou comum
         public string Status { get; set; }
