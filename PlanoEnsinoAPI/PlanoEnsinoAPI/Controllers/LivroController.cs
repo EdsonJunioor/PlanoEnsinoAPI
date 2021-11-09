@@ -48,20 +48,37 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CriarLivro([FromBody] Livro livroModel)
+        [HttpPost, Route("livroAutor/{cdAutor}")]
+        public async Task<IActionResult> SalvarLivro(Livro livroModel, int cdAutor)
         {
             try
             {
-                repository.Add(livroModel);
+                var autor = await repository.GetAutorByIdAsync(cdAutor);
 
-                if (await repository.SaveChangesAsync())
+                if (autor != null)
                 {
-                    return Ok(livroModel);
+                    repository.Add(livroModel);
+
+                    if (await repository.SaveChangesAsync())
+                    {
+                        var livroAutor = new LivroAutor()
+                        {
+                            CdLivro = livroModel.CdLivro,
+                            CdAutor = autor.CdAutor
+                        };
+
+                        await SalvarLivroAutor(livroAutor);
+
+                        return Ok("Livro salvo com sucesso.");
+                    }
+                    else
+                    {
+                        return BadRequest("Erro ao salvar livro.");
+                    }
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar livro.");
+                    return BadRequest("Erro ao salvar livro, autor não pode ser nulo.");
                 }
             }
             catch (Exception ex)
@@ -71,7 +88,7 @@ namespace PlanoEnsinoAPI.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarUsuario(int id, [FromBody] Livro livroModel)
+        public async Task<IActionResult> EditarLivro(int id, [FromBody] Livro livroModel)
         {
             try
             {
@@ -95,26 +112,33 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-
-        [HttpPost, Route("livroAutor")]
-        public async Task<ActionResult> SalvarLivroAutor([FromBody] LivroAutor livroAutorModel)
+        public async Task<ActionResult> SalvarLivroAutor(LivroAutor livroAutorModel)
         {
             try
             {
-                repository.Add(livroAutorModel);
-
-                if (await repository.SaveChangesAsync())
+                var livro = await repository.GetLivroByIdAsync(livroAutorModel.CdLivro);
+                var autor = await repository.GetAutorByIdAsync(livroAutorModel.CdAutor);
+                if(livro != null && autor != null)
                 {
-                    return Ok(livroAutorModel);
+                    repository.Add(livroAutorModel);
+
+                    if (await repository.SaveChangesAsync())
+                    {
+                        return Ok(livroAutorModel);
+                    }
+                    else
+                    {
+                        return BadRequest("Erro ao salvar cdLivro e cdAutor.");
+                    }
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar CdLivro e CdAutor.");
+                    return BadRequest("Erro ao salvar cdLivro e cdAutor, algum registro está nulo.");
                 }
             }
             catch (Exception e)
             {
-                return BadRequest($"Erro:{e.Message}");
+                return BadRequest($"Erro exception:{e.Message}");
             }
         }
     }
