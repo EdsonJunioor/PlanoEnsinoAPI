@@ -41,6 +41,11 @@ namespace PlanoEnsinoAPI.Data
         Task<Avaliacao[]> GetAllAvaliacaoAsync();
         Task<Avaliacao> GetAvaliacaoByIdAsync(int avaliacaoCd);
         Task<Avaliacao> GetAvaliacaoByNameAsync(string nome);
+
+        //GET PlanoEnsino
+        Task<PlanoEnsino[]> GetAllPlanoEnsinoAsync();
+        Task<PlanoEnsino> GetPlanoEnsinoByIdAsync(int planoEnsinoCd);
+        Task<PlanoEnsino> GetPlanoEnsinoByNameAsync(string nome);
     }
 }
 //Repository => Irepository => controller do obj

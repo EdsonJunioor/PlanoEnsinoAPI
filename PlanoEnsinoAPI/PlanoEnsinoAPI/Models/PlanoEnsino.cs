@@ -42,7 +42,6 @@ namespace PlanoEnsinoAPI.Models
         public string Status { get; set; }
         public DateTime DtAtualização { get; set; }
         public Avaliacao Avaliacao { get; set; }
-
         public ICollection<CursoPlanoEnsino> CursoPlanoEnsinos { get; set; }
         public ICollection<UsuarioPlanoEnsino> UsuarioPlanoEnsinos { get; set; }
 

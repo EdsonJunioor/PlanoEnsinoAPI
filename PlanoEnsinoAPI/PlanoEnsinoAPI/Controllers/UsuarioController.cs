@@ -70,12 +70,13 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpGet, Route("testelogin")]
-        public async Task<IActionResult> BuscarUsuarioPeloLogin([FromBody] Usuario usuarioModel)
+        [HttpGet, Route("login")]
+        public async Task<IActionResult> Login([FromBody] Usuario usuarioModel)
         {
             try
             {
                 var usuarioRetornado = await this.repository.GetUsuarioByEmailAsync(usuarioModel.Login);
+
                 if(usuarioRetornado != null)
                 {
                     if (usuarioRetornado.Login == usuarioModel.Login)

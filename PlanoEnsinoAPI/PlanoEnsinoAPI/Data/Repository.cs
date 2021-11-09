@@ -204,5 +204,37 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             return await query.FirstOrDefaultAsync();
         }
+
+        //Plano de Ensino
+        public async Task<PlanoEnsino[]> GetAllPlanoEnsinoAsync()
+        {
+            IQueryable<PlanoEnsino> query = _context.PlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(planoensino => planoensino.CdDisciplina);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<PlanoEnsino> GetPlanoEnsinoByIdAsync(int id)
+        {
+            IQueryable<PlanoEnsino> query = _context.PlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(planoensino => planoensino)
+                         .Where(planoensino => planoensino.CdDisciplina == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<PlanoEnsino> GetPlanoEnsinoByNameAsync(string nome)
+        {
+            IQueryable<PlanoEnsino> query = _context.PlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(planoensino => planoensino)
+                         .Where(planoensino => planoensino.DsDisciplina == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }
