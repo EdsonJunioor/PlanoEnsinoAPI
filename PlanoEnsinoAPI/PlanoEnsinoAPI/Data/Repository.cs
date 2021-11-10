@@ -236,5 +236,37 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             return await query.FirstOrDefaultAsync();
         }
+
+        //Sugestão Plano de Ensino
+        public async Task<SugestaoPlanoEnsino[]> GetAllSugestaoPlanoEnsinoAsync()
+        {
+            IQueryable<SugestaoPlanoEnsino> query = _context.SugestaoPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(sugestaoplanoensino => sugestaoplanoensino.CdSugestaoPlanoEnsino);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByIdAsync(int id)
+        {
+            IQueryable<SugestaoPlanoEnsino> query = _context.SugestaoPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(sugestaoplanoensino => sugestaoplanoensino)
+                         .Where(sugestaoplanoensino => sugestaoplanoensino.CdSugestaoPlanoEnsino == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByNameAsync(string nome)
+        {
+            IQueryable<SugestaoPlanoEnsino> query = _context.SugestaoPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(sugestaoplanoensino => sugestaoplanoensino)
+                         .Where(sugestaoplanoensino => sugestaoplanoensino.DsPlanoEnsino == nome);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

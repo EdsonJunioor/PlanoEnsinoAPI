@@ -10,28 +10,28 @@ namespace PlanoEnsinoAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PlanoEnsinoController : ControllerBase
+    public class SugestaoPlanoEnsinoController : ControllerBase
     {
         private readonly IRepository repository;
 
-        public PlanoEnsinoController(IRepository repository)
+        public SugestaoPlanoEnsinoController(IRepository repository)
         {
             this.repository = repository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListarPlanosEnsino()
+        public async Task<IActionResult> ListarSugestaoPlanosEnsino()
         {
-            var result = await this.repository.GetAllPlanoEnsinoAsync();
+            var result = await this.repository.GetAllSugestaoPlanoEnsinoAsync();
             return Ok(result);
         }
 
         [HttpGet, Route("{id}")]
-        public async Task<IActionResult> BuscarPlanoEnsinoById(int id)
+        public async Task<IActionResult> BuscarSugestaoPlanoEnsinoById(int id)
         {
             try
             {
-                var retorno = await this.repository.GetPlanoEnsinoByIdAsync(id);
+                var retorno = await this.repository.GetSugestaoPlanoEnsinoByIdAsync(id);
 
                 if (retorno != null)
                 {
@@ -39,29 +39,29 @@ namespace PlanoEnsinoAPI.Controllers
                 }
                 else
                 {
-                    return NotFound("Plano de ensino não encontrado.");
+                    return NotFound("Sugestão de Plano de ensino não encontrado.");
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest($"Plano de Ensino Erro:{ex.Message}");
+                return BadRequest($"Sugestão de Plano de Ensino Erro:{ex.Message}");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CriarPlanoEnsino([FromBody] PlanoEnsino planoEnsinoModel)
+        public async Task<IActionResult> CriarSugestaoPlanoEnsino([FromBody] SugestaoPlanoEnsino sugestaoPlanoEnsinoModel)
         {
             try
             {
-                repository.Add(planoEnsinoModel);
+                repository.Add(sugestaoPlanoEnsinoModel);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(planoEnsinoModel);
+                    return Ok(sugestaoPlanoEnsinoModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar Plano de Ensino.");
+                    return BadRequest("Erro ao salvar Sugestão de Plano de Ensino.");
                 }
             }
             catch (Exception ex)
@@ -71,21 +71,21 @@ namespace PlanoEnsinoAPI.Controllers
         }
 
         [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarPlanoEnsino(int id, [FromBody] PlanoEnsino planoEnsinoModel)
+        public async Task<IActionResult> EditarSugestaoPlanoEnsino(int id, [FromBody] SugestaoPlanoEnsino sugestaoPlanoEnsinoModel)
         {
             try
             {
-                var retorno = await repository.GetPlanoEnsinoByIdAsync(id);
+                var retorno = await repository.GetSugestaoPlanoEnsinoByIdAsync(id);
 
                 if (retorno != null)
                 {
-                    repository.Update(planoEnsinoModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
+                    repository.Update(sugestaoPlanoEnsinoModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
                     await repository.SaveChangesAsync();
-                    return Ok("Plano de Ensino atualizado com sucesso.");
+                    return Ok("Sugestao de Plano de Ensino atualizado com sucesso.");
                 }
                 else
                 {
-                    return NotFound("Plano de Ensino não encontrado.");
+                    return NotFound("Sugestao de Plano de Ensino não encontrado.");
 
                 }
             }

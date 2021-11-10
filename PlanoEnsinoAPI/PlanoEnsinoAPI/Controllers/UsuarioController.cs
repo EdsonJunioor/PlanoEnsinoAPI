@@ -35,7 +35,7 @@ namespace PlanoEnsinoAPI.Controllers
                 
                 if(retorno != null)
                 {
-                    return Ok(retorno.Nome.ToLower());
+                    return Ok(retorno);
                 }
                 else
                 {
