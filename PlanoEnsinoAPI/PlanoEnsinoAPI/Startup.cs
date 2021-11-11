@@ -45,6 +45,8 @@ namespace PlanoEnsinoAPI
 
             app.UseAuthorization();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // permição de acesso ao front-end de todos os metodos ou dependendo da configuração passada aqui.
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
