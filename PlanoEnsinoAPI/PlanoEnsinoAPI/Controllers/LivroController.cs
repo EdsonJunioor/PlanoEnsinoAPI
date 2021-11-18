@@ -48,37 +48,20 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPost, Route("livroAutor/{cdAutor}")]
-        public async Task<IActionResult> SalvarLivro(Livro livroModel, int cdAutor)
+        [HttpPost]
+        public async Task<IActionResult> SalvarLivro([FromBody] Livro livroModel)
         {
             try
             {
-                var autor = await repository.GetAutorByIdAsync(cdAutor);
+                repository.Add(livroModel);
 
-                if (autor != null)
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Add(livroModel);
-
-                    if (await repository.SaveChangesAsync())
-                    {
-                        var livroAutor = new LivroAutor()
-                        {
-                            CdLivro = livroModel.CdLivro,
-                            CdAutor = autor.CdAutor
-                        };
-
-                        await SalvarLivroAutor(livroAutor);
-
-                        return Ok("Livro salvo com sucesso.");
-                    }
-                    else
-                    {
-                        return BadRequest("Erro ao salvar livro.");
-                    }
+                    return Ok(livroModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar livro, autor não pode ser nulo.");
+                    return BadRequest("Erro ao salvar livro.");
                 }
             }
             catch (Exception ex)
@@ -87,17 +70,15 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarLivro(int id, [FromBody] Livro livroModel)
+        [HttpPut]
+        public async Task<IActionResult> EditarLivro([FromBody] Livro livroModel)
         {
             try
             {
-                var retorno = await repository.GetLivroByIdAsync(id);
+                repository.Update(livroModel);
 
-                if (retorno != null)
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Update(livroModel);
-                    await repository.SaveChangesAsync();
                     return Ok("Livro atualizado com sucesso.");
                 }
                 else

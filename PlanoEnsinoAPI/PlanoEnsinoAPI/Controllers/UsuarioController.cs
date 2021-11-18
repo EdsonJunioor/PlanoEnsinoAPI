@@ -106,17 +106,15 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
             
-        [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarUsuario(int id, [FromBody]Usuario usuarioModel)
+        [HttpPut]
+        public async Task<IActionResult> EditarUsuario([FromBody]Usuario usuarioModel)
         {
             try
             {
-                var retorno = await repository.GetUsuarioByIdAsync(id);
+                repository.Update(usuarioModel);
 
-                if(retorno != null)
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Update(usuarioModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
-                    await repository.SaveChangesAsync();
                     return Ok("Usuário atualizado com sucesso.");
                 }
                 else

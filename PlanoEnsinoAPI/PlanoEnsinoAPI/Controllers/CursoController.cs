@@ -70,17 +70,14 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarCurso(int id, [FromBody] Curso cursoModel)
+        [HttpPut]
+        public async Task<IActionResult> EditarCurso([FromBody] Curso cursoModel)
         {
             try
             {
-                var retorno = await repository.GetCursoByIdAsync(id);
-
-                if (retorno != null)
+                repository.Update(cursoModel);
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Update(cursoModel);
-                    await repository.SaveChangesAsync();
                     return Ok("Curso atualizado com sucesso.");
                 }
                 else

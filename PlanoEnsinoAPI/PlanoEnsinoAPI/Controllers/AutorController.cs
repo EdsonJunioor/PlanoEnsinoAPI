@@ -61,7 +61,7 @@ namespace PlanoEnsinoAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar curso.");
+                    return BadRequest("Erro ao salvar autor.");
                 }
             }
             catch (Exception ex)
@@ -70,17 +70,14 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarAutor(int id, [FromBody] Autor autorModel)
+        [HttpPut]
+        public async Task<IActionResult> EditarAutor([FromBody] Autor autorModel)
         {
             try
             {
-                var retorno = await repository.GetAutorByIdAsync(id);
-
-                if (retorno != null)
+                repository.Update(autorModel);
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Update(autorModel);
-                    await repository.SaveChangesAsync();
                     return Ok("Autor atualizado com sucesso.");
                 }
                 else
