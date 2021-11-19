@@ -92,5 +92,27 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> ApagarCurso([FromBody] Curso cursoModel)
+        {
+            try
+            {
+                repository.Delete(cursoModel);
+
+                if (await repository.SaveChangesAsync())
+                {
+                    return Ok(cursoModel);
+                }
+                else
+                {
+                    return BadRequest("Erro ao apagar curso.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro:{ex.Message}");
+            }
+        }
+
     }
 }

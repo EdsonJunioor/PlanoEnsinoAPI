@@ -10,10 +10,10 @@ namespace PlanoEnsinoAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LivroController : ControllerBase
+    public class LivroAutorController : ControllerBase
     {
         private readonly IRepository repository;
-        public LivroController(IRepository repository)
+        public LivroAutorController(IRepository repository)
         {
             this.repository = repository;
         }
@@ -25,43 +25,20 @@ namespace PlanoEnsinoAPI.Controllers
             return Ok(result);
         }
 
-
-        [HttpGet, Route("{id}")]
-        public async Task<IActionResult> BuscarLivroById(int id)
-        {
-            try
-            {
-                var retorno = await this.repository.GetLivroByIdAsync(id);
-
-                if (retorno != null)
-                {
-                    return Ok(retorno);
-                }
-                else
-                {
-                    return NotFound("Livro não encontrado.");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Livro Erro:{ex.Message}");
-            }
-        }
-
         [HttpPost]
-        public async Task<IActionResult> SalvarLivro([FromBody] Livro livroModel)
+        public async Task<IActionResult> SalvarLivroAutor([FromBody] LivroAutor livroAutorModel)
         {
             try
             {
-                repository.Add(livroModel);
+                repository.Add(livroAutorModel);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(livroModel);
+                    return Ok(livroAutorModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar livro.");
+                    return BadRequest("Erro ao linkar livro e autor.");
                 }
             }
             catch (Exception ex)
@@ -94,19 +71,19 @@ namespace PlanoEnsinoAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> ApagarLivro([FromBody] Livro livroModel)
+        public async Task<IActionResult> ApagarLivroAutor([FromBody] LivroAutor livroAutorModel)
         {
             try
             {
-                repository.Delete(livroModel);
+                repository.Delete(livroAutorModel);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(livroModel);
+                    return Ok(livroAutorModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao apagar livro.");
+                    return BadRequest("Erro ao apagar a ligação entre livro e autor.");
                 }
             }
             catch (Exception ex)
