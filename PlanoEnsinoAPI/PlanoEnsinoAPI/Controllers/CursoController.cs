@@ -92,16 +92,18 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> ApagarCurso([FromBody] Curso cursoModel)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ApagarCurso(int id)
         {
             try
             {
-                repository.Delete(cursoModel);
+                Curso cursoObj = new Curso() { CdCurso = id };
+
+                repository.Delete(cursoObj);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(cursoModel);
+                    return Ok(id);
                 }
                 else
                 {
@@ -113,6 +115,5 @@ namespace PlanoEnsinoAPI.Controllers
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
-
     }
 }

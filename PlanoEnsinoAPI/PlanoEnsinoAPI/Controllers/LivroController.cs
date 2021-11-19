@@ -93,16 +93,18 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> ApagarLivro([FromBody] Livro livroModel)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ApagarLivro(int id)
         {
             try
             {
-                repository.Delete(livroModel);
+                Livro livroObj = new Livro() { CdLivro = id };
+
+                repository.Delete(livroObj);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(livroModel);
+                    return Ok(id);
                 }
                 else
                 {

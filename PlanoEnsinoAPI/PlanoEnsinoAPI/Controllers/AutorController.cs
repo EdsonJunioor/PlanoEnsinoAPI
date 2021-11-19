@@ -92,16 +92,18 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> ApagarAutor([FromBody] Autor autorModel)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ApagarAutor(int id)
         {
             try
             {
-                repository.Delete(autorModel);
+                Autor autorObj = new Autor() { CdAutor = id };
+
+                repository.Delete(autorObj);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(autorModel);
+                    return Ok(id);
                 }
                 else
                 {
@@ -113,6 +115,5 @@ namespace PlanoEnsinoAPI.Controllers
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
-
     }
 }
