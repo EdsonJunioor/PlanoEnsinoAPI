@@ -69,42 +69,6 @@ namespace PlanoEnsinoAPI.Controllers
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
-
-        [HttpGet, Route("login")]
-        public async Task<IActionResult> Login([FromBody] Usuario usuarioModel)
-        {
-            try
-            {
-                var usuarioRetornado = await this.repository.GetUsuarioByEmailAsync(usuarioModel.Login);
-
-                if(usuarioRetornado != null)
-                {
-                    if (usuarioRetornado.Login == usuarioModel.Login)
-                    {
-                        if(usuarioRetornado.Senha == usuarioModel.Senha)
-                        {
-                            return Ok(usuarioRetornado);
-                        }
-                        else
-                        {
-                            return NotFound("Senha incorreta.");
-                        }
-                    }
-                    else
-                    {
-                        return NotFound("Login incorreta.");
-                    }
-                }
-                else
-                {
-                    return NotFound("Usuário não encontrado.");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Erro:{ex.Message}");
-            }
-        }
             
         [HttpPut]
         public async Task<IActionResult> EditarUsuario([FromBody]Usuario usuarioModel)
