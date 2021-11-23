@@ -13,6 +13,7 @@ namespace PlanoEnsinoAPI.Models
         public int Ano { get; set; }
 
         public ICollection<LivroAutor> LivroAutores { get; set; }
+        public ICollection<LivroPlanoEnsino> LivroPlanos { get; set; }
 
         public Livro() { }      //construtor vazio para não bugar e precisar do NEWTONSOFT
 

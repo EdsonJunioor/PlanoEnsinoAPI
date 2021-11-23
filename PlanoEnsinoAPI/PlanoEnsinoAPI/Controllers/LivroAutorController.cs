@@ -18,13 +18,6 @@ namespace PlanoEnsinoAPI.Controllers
             this.repository = repository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ListarLivros()
-        {
-            var result = await this.repository.GetAllLivroAsync();
-            return Ok(result);
-        }
-
         [HttpPost]
         public async Task<IActionResult> SalvarLivroAutor([FromBody] LivroAutor livroAutorModel)
         {
@@ -70,20 +63,22 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> ApagarLivroAutor([FromBody] LivroAutor livroAutorModel)
+        [HttpDelete, Route("{cdLivro}/{cdAutor}")]
+        public async Task<IActionResult> ApagarLivroAutor(int cdLivro, int cdAutor)
         {
             try
             {
-                repository.Delete(livroAutorModel);
+                var resulta = await this.repository.GetLivroAutorByIdAsync(cdLivro, cdAutor);
 
-                if (await repository.SaveChangesAsync())
+                if (resulta != null)
                 {
-                    return Ok(livroAutorModel);
+                    repository.Delete(resulta);
+                    await repository.SaveChangesAsync();
+                    return Ok("O livro e autor foram desconectados com sucesso!");
                 }
                 else
                 {
-                    return BadRequest("Erro ao apagar a ligação entre livro e autor.");
+                    return BadRequest("Erro ao desconectar livro e autor.");
                 }
             }
             catch (Exception ex)

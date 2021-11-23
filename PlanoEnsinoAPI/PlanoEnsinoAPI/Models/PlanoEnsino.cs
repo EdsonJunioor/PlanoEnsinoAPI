@@ -16,9 +16,7 @@ namespace PlanoEnsinoAPI.Models
         public string DsEmenta { get; set; }        //tipo de prof se é ADM, NDE ou comum
         public string DsObjetivo { get; set; }
         public string DsMTDGeral { get; set; }      //metodologia geral
-        public string DsObservecao { get; set; }
-        public string DsBiblioBasica { get; set; }
-        public string DsBiblioComplementar { get; set; }
+        public string DsObservacao { get; set; }
         public string DsSemana1 { get; set; }
         public string DsSemana2 { get; set; }
         public string DsSemana3 { get; set; }
@@ -44,11 +42,12 @@ namespace PlanoEnsinoAPI.Models
         public Avaliacao Avaliacao { get; set; }
         public ICollection<CursoPlanoEnsino> CursoPlanoEnsinos { get; set; }
         public ICollection<UsuarioPlanoEnsino> UsuarioPlanoEnsinos { get; set; }
+        public ICollection<LivroPlanoEnsino> LivroPlanos { get; set; }
 
 
     public PlanoEnsino() { }    //construtor vazio para não bugar e precisar do NEWTONSOFT
 
-        public PlanoEnsino(int cdDisciplina, string dsDisciplina, int nrCreditos, int nrHorasSala, int nrHorasPP, string anoSemestre, string dsEmenta, string dsObjetivo, string dsMTDGeral, string dsObservecao, string dsBiblioBasica, string dsBiblioComplementar, string dsSemana1, string dsSemana2, string dsSemana3, string dsSemana4, string dsSemana5, string dsSemana6, string dsSemana7, string dsSemana8, string dsSemana9, string dsSemana10, string dsSemana11, string dsSemana12, string dsSemana13, string dsSemana14, string dsSemana15, string dsSemana16, string dsSemana17, string dsSemana18, string dsSemana19, string dsSemana20, string status, DateTime dtAtualização)
+        public PlanoEnsino(int cdDisciplina, string dsDisciplina, int nrCreditos, int nrHorasSala, int nrHorasPP, string anoSemestre, string dsEmenta, string dsObjetivo, string dsMTDGeral, string dsObservacao, string dsSemana1, string dsSemana2, string dsSemana3, string dsSemana4, string dsSemana5, string dsSemana6, string dsSemana7, string dsSemana8, string dsSemana9, string dsSemana10, string dsSemana11, string dsSemana12, string dsSemana13, string dsSemana14, string dsSemana15, string dsSemana16, string dsSemana17, string dsSemana18, string dsSemana19, string dsSemana20, string status, DateTime dtAtualização)
         {
             CdDisciplina = cdDisciplina;
             DsDisciplina = dsDisciplina;
@@ -59,9 +58,7 @@ namespace PlanoEnsinoAPI.Models
             DsEmenta = dsEmenta;
             DsObjetivo = dsObjetivo;
             DsMTDGeral = dsMTDGeral;
-            DsObservecao = dsObservecao;
-            DsBiblioBasica = dsBiblioBasica;
-            DsBiblioComplementar = dsBiblioComplementar;
+            DsObservacao = dsObservacao;
             DsSemana1 = dsSemana1;
             DsSemana2 = dsSemana2;
             DsSemana3 = dsSemana3;

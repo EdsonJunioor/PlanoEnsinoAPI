@@ -152,6 +152,29 @@ namespace PlanoEnsinoAPI.Migrations
                     b.ToTable("LivroAutor");
                 });
 
+            modelBuilder.Entity("PlanoEnsinoAPI.Models.LivroPlanoEnsino", b =>
+                {
+                    b.Property<int>("CdLivro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CdDisciplina")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CdLivroPlanoEnsino")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TpBibliografia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CdLivro", "CdDisciplina");
+
+                    b.HasIndex("CdDisciplina");
+
+                    b.ToTable("LivroPlanoEnsino");
+                });
+
             modelBuilder.Entity("PlanoEnsinoAPI.Models.PlanoEnsino", b =>
                 {
                     b.Property<int>("CdDisciplina")
@@ -160,12 +183,6 @@ namespace PlanoEnsinoAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AnoSemestre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsBiblioBasica")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsBiblioComplementar")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DsDisciplina")
@@ -180,7 +197,7 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<string>("DsObjetivo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsObservecao")
+                    b.Property<string>("DsObservacao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DsSemana1")
@@ -276,12 +293,6 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<int>("CdDisciplina")
                         .HasColumnType("int");
 
-                    b.Property<string>("DsBiblioBasica")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsBiblioComplementar")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DsDisciplina")
                         .HasColumnType("nvarchar(max)");
 
@@ -294,10 +305,7 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<string>("DsObjetivo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsObservecao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsPlanoEnsino")
+                    b.Property<string>("DsObservacao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DsSemana1")
@@ -449,7 +457,7 @@ namespace PlanoEnsinoAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", null)
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
                         .WithMany("CursoPlanoEnsinos")
                         .HasForeignKey("CdDisciplina")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -466,6 +474,21 @@ namespace PlanoEnsinoAPI.Migrations
 
                     b.HasOne("PlanoEnsinoAPI.Models.Livro", "Livro")
                         .WithMany("LivroAutores")
+                        .HasForeignKey("CdLivro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlanoEnsinoAPI.Models.LivroPlanoEnsino", b =>
+                {
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
+                        .WithMany("LivroPlanos")
+                        .HasForeignKey("CdDisciplina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlanoEnsinoAPI.Models.Livro", "Livro")
+                        .WithMany("LivroPlanos")
                         .HasForeignKey("CdLivro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

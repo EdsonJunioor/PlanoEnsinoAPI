@@ -142,6 +142,19 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             return await query.FirstOrDefaultAsync();
         }
 
+        //LivroAutor
+        public async Task<LivroAutor> GetLivroAutorByIdAsync(int cdLivro, int cdAutor)
+        {
+            IQueryable<LivroAutor> query = _context.LivroAutor;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livroa => livroa)
+                         .Where(livroa => livroa.CdLivro == cdLivro)
+                         .Where(livroa => livroa.CdAutor == cdAutor);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Autor
         public async Task<Autor[]> GetAllAutorAsync()
         {
@@ -264,7 +277,7 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             query = query.AsNoTracking()
                          .OrderBy(sugestaoplanoensino => sugestaoplanoensino)
-                         .Where(sugestaoplanoensino => sugestaoplanoensino.DsPlanoEnsino == nome);
+                         .Where(sugestaoplanoensino => sugestaoplanoensino.DsDisciplina == nome);
 
             return await query.FirstOrDefaultAsync();
         }

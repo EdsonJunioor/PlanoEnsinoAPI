@@ -51,6 +51,9 @@ namespace PlanoEnsinoAPI.Data
         Task<SugestaoPlanoEnsino[]> GetAllSugestaoPlanoEnsinoAsync();
         Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByIdAsync(int sugestaoPlanoEnsinoCd);
         Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByNameAsync(string nome);
+
+        //GET LIVROAUTOR
+        Task<LivroAutor> GetLivroAutorByIdAsync(int cdLivro, int cdAutor);
     }
 }
 //Repository => Irepository => controller do obj
