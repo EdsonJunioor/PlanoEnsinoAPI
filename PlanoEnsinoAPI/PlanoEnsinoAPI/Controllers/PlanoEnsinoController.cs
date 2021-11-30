@@ -69,5 +69,28 @@ namespace PlanoEnsinoAPI.Controllers
                 return BadRequest($"Erro:{ex.Message}");
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> EditarPlano([FromBody] PlanoEnsino planoEnsinoModel)
+        {
+            try
+            {
+                repository.Update(planoEnsinoModel);
+
+                if (await repository.SaveChangesAsync())
+                {
+                    return Ok("Plano de ensino atualizado com sucesso.");
+                }
+                else
+                {
+                    return NotFound("Plano de ensino não encontrado.");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro:{ex.Message}");
+            }
+        }
     }
 }

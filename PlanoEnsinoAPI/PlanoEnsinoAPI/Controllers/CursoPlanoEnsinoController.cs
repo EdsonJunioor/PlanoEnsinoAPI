@@ -10,28 +10,28 @@ namespace PlanoEnsinoAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LivroAutorController : ControllerBase
+    public class CursoPlanoEnsinoController : ControllerBase
     {
         private readonly IRepository repository;
-        public LivroAutorController(IRepository repository)
+        public CursoPlanoEnsinoController(IRepository repository)
         {
             this.repository = repository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> SalvarLivroAutor([FromBody] LivroAutor livroAutorModel)
+        public async Task<IActionResult> SalvarCursoPlanoEnsino([FromBody] CursoPlanoEnsino cursoPlanoEnsinoModel)
         {
             try
             {
-                repository.Add(livroAutorModel);
+                repository.Add(cursoPlanoEnsinoModel);
 
                 if (await repository.SaveChangesAsync())
                 {
-                    return Ok(livroAutorModel);
+                    return Ok(cursoPlanoEnsinoModel);
                 }
                 else
                 {
-                    return BadRequest("Erro ao linkar livro e autor.");
+                    return BadRequest("Erro ao conectar curso e plano de ensino.");
                 }
             }
             catch (Exception ex)
@@ -40,22 +40,22 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpDelete, Route("{cdLivro}/{cdAutor}")]
-        public async Task<IActionResult> ApagarLivroAutor(int cdLivro, int cdAutor)
+        [HttpDelete, Route("{cdCurso}/{cdDisciplina}")]
+        public async Task<IActionResult> ApagarCursoPlanoEnsino(int cdCurso, int cdDisciplina)
         {
             try
             {
-                var resulta = await this.repository.GetLivroAutorByIdAsync(cdLivro, cdAutor);
+                var resulta = await this.repository.GetCursoPlanoEnsinoById(cdCurso, cdDisciplina);
 
                 if (resulta != null)
                 {
                     repository.Delete(resulta);
                     await repository.SaveChangesAsync();
-                    return Ok("O livro e autor foram desconectados com sucesso!");
+                    return Ok("O curso e plano de ensino foram desconectados com sucesso!");
                 }
                 else
                 {
-                    return BadRequest("Erro ao desconectar livro e autor.");
+                    return BadRequest("Erro ao desconectar curso e plano de ensino.");
                 }
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,6 @@ namespace PlanoEnsinoAPI.Models
         public string DsLivro { get; set; }
         public string Editora { get; set; }
         public int Ano { get; set; }
-
         public ICollection<LivroAutor> LivroAutores { get; set; }
         public ICollection<LivroPlanoEnsino> LivroPlanos { get; set; }
 

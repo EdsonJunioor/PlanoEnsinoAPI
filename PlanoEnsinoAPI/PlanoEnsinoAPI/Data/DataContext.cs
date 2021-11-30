@@ -10,9 +10,7 @@ namespace PlanoEnsinoAPI.Data
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
         public DbSet<Autor> Autor { get; set; }
-        public DbSet<Avaliacao> Avaliacao { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<CursoPlanoEnsino> CursoPlanoEnsino { get; set; }
         public DbSet<Livro> Livro { get; set; }
@@ -31,21 +29,6 @@ namespace PlanoEnsinoAPI.Data
 
             builder.Entity<Autor>()
                 .Property(a => a.CdAutor).ValueGeneratedOnAdd();
-
-            builder.Entity<Avaliacao>()
-              .HasKey(a => a.CdAvaliacao);
-
-            builder.Entity<Avaliacao>()
-                .Property(a => a.CdAvaliacao).ValueGeneratedOnAdd();
-
-            builder.Entity<Avaliacao>()
-            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
-            .WithOne(p => p.Avaliacao)
-            .HasForeignKey<Avaliacao>(s => s.CdDisciplina);
-
-            builder.Entity<Avaliacao>()
-                .Property(a => a.Peso)
-                .HasColumnType("decimal(18,2)");
 
             builder.Entity<Curso>()
              .HasKey(c => c.CdCurso);
@@ -100,6 +83,9 @@ namespace PlanoEnsinoAPI.Data
 
             builder.Entity<SugestaoPlanoEnsino>()
             .Property(p => p.CdSugestaoPlanoEnsino).ValueGeneratedOnAdd();
+
+            builder.Entity<SugestaoPlanoEnsino>()
+                .Property(p => p.DtCadastroSugestao).HasDefaultValueSql("getdate()");
 
             builder.Entity<Usuario>()
                  .HasKey(u => u.CdUsuario);
