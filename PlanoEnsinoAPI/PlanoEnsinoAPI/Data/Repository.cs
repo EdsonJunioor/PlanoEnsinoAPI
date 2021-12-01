@@ -74,7 +74,6 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             IQueryable<Usuario> query = _context.Usuario;
 
             query = query.AsNoTracking()
-                         .OrderBy(usuario => usuario)
                          .Where(usuario => usuario.Login == email);
 
             return await query.FirstOrDefaultAsync();
