@@ -85,10 +85,31 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             IQueryable<Livro> query = _context.Livro;
 
             query = query.AsNoTracking()
-                         .OrderBy(livro => livro.DsLivro);
+                         .OrderBy(l => l.DsLivro);
 
             return await query.ToArrayAsync();
         }
+        public async Task<List<LivroAutorAll>> GetLivroAutorAll()
+        {
+            var listinha = new List<LivroAutorAll>();
+            //IQueryable<Livro> query = _context.LivroAutor;
+
+            listinha = await _context.LivroAutor
+                        .Join(_context.Livro, la => la.CdLivro, li => li.CdLivro, (la, li) => new { la, li })
+                        .Join(_context.Autor, la_li => la_li.la.CdAutor, al => al.CdAutor, (la_li, al) => new LivroAutorAll
+                        {
+                            CdLivro = la_li.li.CdLivro,
+                            DsLivro = la_li.li.DsLivro,
+                            Editora = la_li.li.Editora,
+                            Ano = la_li.li.Ano,
+                            CdAutor = la_li.la.CdAutor,
+                            Nome = la_li.la.Autor.Nome
+                        })
+                        .OrderBy(l => l.DsLivro).ToListAsync();
+
+            return listinha;
+        }
+
         public async Task<Livro> GetLivroByIdAsync(int id)
         {
             IQueryable<Livro> query = _context.Livro;
@@ -141,6 +162,58 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             return await query.FirstOrDefaultAsync();
         }
 
+        //Curso Plano Ensino
+        public async Task<CursoPlanoEnsino> GetCursoPlanoEnsinoById(int cdCurso, int cdDisciplina)
+        {
+            IQueryable<CursoPlanoEnsino> query = _context.CursoPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(cursop => cursop)
+                         .Where(cursop => cursop.CdCurso == cdCurso)
+                         .Where(cursop => cursop.CdDisciplina == cdDisciplina);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Usuario Plano Ensino
+        public async Task<UsuarioPlanoEnsino> GetUsuarioPlanoEnsinoById(int cdUsuario, int cdDisciplina)
+        {
+            IQueryable<UsuarioPlanoEnsino> query = _context.UsuarioPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(usuariop => usuariop)
+                         .Where(usuariop => usuariop.CdUsuario == cdUsuario)
+                         .Where(usuariop => usuariop.CdDisciplina == cdDisciplina);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //Livro Plano Ensino
+        public async Task<LivroPlanoEnsino> GetLivroPlanoEnsinoById(int cdLivro, int cdDisciplina)
+        {
+            IQueryable<LivroPlanoEnsino> query = _context.LivroPlanoEnsino;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livrop => livrop)
+                         .Where(livrop => livrop.CdLivro == cdLivro)
+                         .Where(livrop => livrop.CdDisciplina == cdDisciplina);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        //LivroAutor
+        public async Task<LivroAutor> GetLivroAutorByIdAsync(int cdLivro, int cdAutor)
+        {
+            IQueryable<LivroAutor> query = _context.LivroAutor;
+
+            query = query.AsNoTracking()
+                         .OrderBy(livroa => livroa)
+                         .Where(livroa => livroa.CdLivro == cdLivro)
+                         .Where(livroa => livroa.CdAutor == cdAutor);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
         //Autor
         public async Task<Autor[]> GetAllAutorAsync()
         {
@@ -168,38 +241,6 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
             query = query.AsNoTracking()
                          .OrderBy(autor => autor)
                          .Where(autor => autor.Nome == nome);
-
-            return await query.FirstOrDefaultAsync();
-        }
-
-        //Avaliacao
-        public async Task<Avaliacao[]> GetAllAvaliacaoAsync()
-        {
-            IQueryable<Avaliacao> query = _context.Avaliacao;
-
-            query = query.AsNoTracking()
-                         .OrderBy(avaliacao => avaliacao.CdAvaliacao);
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<Avaliacao> GetAvaliacaoByIdAsync(int id)
-        {
-            IQueryable<Avaliacao> query = _context.Avaliacao;
-
-            query = query.AsNoTracking()
-                         .OrderBy(avaliacao => avaliacao)
-                         .Where(avaliacao => avaliacao.CdAvaliacao == id);
-
-            return await query.FirstOrDefaultAsync();
-        }
-        public async Task<Avaliacao> GetAvaliacaoByNameAsync(string nome)
-        {
-            IQueryable<Avaliacao> query = _context.Avaliacao;
-
-            query = query.AsNoTracking()
-                         .OrderBy(avaliacao => avaliacao)
-                         .Where(avaliacao => avaliacao.Nome == nome);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -263,7 +304,7 @@ namespace PlanoEnsinoAPI.Data               //Repository => Irepository => contr
 
             query = query.AsNoTracking()
                          .OrderBy(sugestaoplanoensino => sugestaoplanoensino)
-                         .Where(sugestaoplanoensino => sugestaoplanoensino.DsPlanoEnsino == nome);
+                         .Where(sugestaoplanoensino => sugestaoplanoensino.DsSugestaoPlanoEnsino == nome);
 
             return await query.FirstOrDefaultAsync();
         }

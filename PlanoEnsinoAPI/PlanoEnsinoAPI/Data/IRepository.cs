@@ -23,7 +23,7 @@ namespace PlanoEnsinoAPI.Data
         Task<Usuario> GetUsuarioByEmailAsync(string email);
 
         //GET Livro
-        Task<Livro[]> GetAllLivroAsync ();
+        Task<Livro[]> GetAllLivroAsync();
         Task<Livro> GetLivroByIdAsync (int livroCd);
         Task<Livro> GetLivroByNameAsync(string nome);
 
@@ -35,12 +35,7 @@ namespace PlanoEnsinoAPI.Data
         //GET Autor
         Task<Autor[]> GetAllAutorAsync();
         Task<Autor> GetAutorByIdAsync (int autorCd);
-        Task<Autor> GetAutorByNameAsync (string nome);
-
-        //GET Avaliacao
-        Task<Avaliacao[]> GetAllAvaliacaoAsync();
-        Task<Avaliacao> GetAvaliacaoByIdAsync(int avaliacaoCd);
-        Task<Avaliacao> GetAvaliacaoByNameAsync(string nome);
+        Task<Autor> GetAutorByNameAsync(string nome);
 
         //GET PlanoEnsino
         Task<PlanoEnsino[]> GetAllPlanoEnsinoAsync();
@@ -51,6 +46,19 @@ namespace PlanoEnsinoAPI.Data
         Task<SugestaoPlanoEnsino[]> GetAllSugestaoPlanoEnsinoAsync();
         Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByIdAsync(int sugestaoPlanoEnsinoCd);
         Task<SugestaoPlanoEnsino> GetSugestaoPlanoEnsinoByNameAsync(string nome);
+
+        //GET LIVROAUTOR
+        Task<LivroAutor> GetLivroAutorByIdAsync(int cdLivro, int cdAutor);
+        Task<List<LivroAutorAll>> GetLivroAutorAll();
+
+        //GET CURSOPLANOENSINO
+        Task<CursoPlanoEnsino> GetCursoPlanoEnsinoById(int cdCurso, int cdDisciplina);
+
+        //GET USUARIOPLANOENSINO
+        Task<UsuarioPlanoEnsino> GetUsuarioPlanoEnsinoById(int cdUsuario, int cdDisciplina);
+
+        //GET LIVROPLANOENSINO
+        Task<LivroPlanoEnsino> GetLivroPlanoEnsinoById(int cdLivro, int cdDisciplina);
     }
 }
 //Repository => Irepository => controller do obj

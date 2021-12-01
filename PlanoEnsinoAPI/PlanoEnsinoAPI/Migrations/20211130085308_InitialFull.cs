@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlanoEnsinoAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialFull : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,9 +63,35 @@ namespace PlanoEnsinoAPI.Migrations
                     DsEmenta = table.Column<string>(nullable: true),
                     DsObjetivo = table.Column<string>(nullable: true),
                     DsMTDGeral = table.Column<string>(nullable: true),
-                    DsObservecao = table.Column<string>(nullable: true),
-                    DsBiblioBasica = table.Column<string>(nullable: true),
-                    DsBiblioComplementar = table.Column<string>(nullable: true),
+                    DsObservacao = table.Column<string>(nullable: true),
+                    NomeA1 = table.Column<string>(nullable: true),
+                    PesoA1 = table.Column<string>(nullable: true),
+                    DsAlunoA1 = table.Column<string>(nullable: true),
+                    DsConsultaA1 = table.Column<string>(nullable: true),
+                    DsAvaliacaoA1 = table.Column<string>(nullable: true),
+                    DsConteudoA1 = table.Column<string>(nullable: true),
+                    DsObservacaoA1 = table.Column<string>(nullable: true),
+                    NomeA2 = table.Column<string>(nullable: true),
+                    PesoA2 = table.Column<string>(nullable: true),
+                    DsAlunoA2 = table.Column<string>(nullable: true),
+                    DsConsultaA2 = table.Column<string>(nullable: true),
+                    DsAvaliacaoA2 = table.Column<string>(nullable: true),
+                    DsConteudoA2 = table.Column<string>(nullable: true),
+                    DsObservacaoA2 = table.Column<string>(nullable: true),
+                    NomeA3 = table.Column<string>(nullable: true),
+                    PesoA3 = table.Column<string>(nullable: true),
+                    DsAlunoA3 = table.Column<string>(nullable: true),
+                    DsConsultaA3 = table.Column<string>(nullable: true),
+                    DsAvaliacaoA3 = table.Column<string>(nullable: true),
+                    DsConteudoA3 = table.Column<string>(nullable: true),
+                    DsObservacaoA3 = table.Column<string>(nullable: true),
+                    NomeA4 = table.Column<string>(nullable: true),
+                    PesoA4 = table.Column<string>(nullable: true),
+                    DsAlunoA4 = table.Column<string>(nullable: true),
+                    DsConsultaA4 = table.Column<string>(nullable: true),
+                    DsAvaliacaoA4 = table.Column<string>(nullable: true),
+                    DsConteudoA4 = table.Column<string>(nullable: true),
+                    DsObservacaoA4 = table.Column<string>(nullable: true),
                     DsSemana1 = table.Column<string>(nullable: true),
                     DsSemana2 = table.Column<string>(nullable: true),
                     DsSemana3 = table.Column<string>(nullable: true),
@@ -87,7 +113,7 @@ namespace PlanoEnsinoAPI.Migrations
                     DsSemana19 = table.Column<string>(nullable: true),
                     DsSemana20 = table.Column<string>(nullable: true),
                     Status = table.Column<string>(nullable: true),
-                    DtAtualização = table.Column<DateTime>(nullable: false)
+                    DtAtualização = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
@@ -115,14 +141,14 @@ namespace PlanoEnsinoAPI.Migrations
                 name: "LivroAutor",
                 columns: table => new
                 {
-                    CdLivroAutor = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     CdLivro = table.Column<int>(nullable: false),
-                    CdAutor = table.Column<int>(nullable: false)
+                    CdAutor = table.Column<int>(nullable: false),
+                    CdLivroAutor = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LivroAutor", x => x.CdLivroAutor);
+                    table.PrimaryKey("PK_LivroAutor", x => new { x.CdLivro, x.CdAutor });
                     table.ForeignKey(
                         name: "FK_LivroAutor_Autor_CdAutor",
                         column: x => x.CdAutor,
@@ -138,43 +164,17 @@ namespace PlanoEnsinoAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Avaliacao",
-                columns: table => new
-                {
-                    CdAvaliacao = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CdDisciplina = table.Column<int>(nullable: false),
-                    Nome = table.Column<string>(nullable: true),
-                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DsAluno = table.Column<string>(nullable: true),
-                    DsConsulta = table.Column<string>(nullable: true),
-                    DsAvaliacao = table.Column<string>(nullable: true),
-                    DsConteudo = table.Column<string>(nullable: true),
-                    DsObservacao = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Avaliacao", x => x.CdAvaliacao);
-                    table.ForeignKey(
-                        name: "FK_Avaliacao_PlanoEnsino_CdDisciplina",
-                        column: x => x.CdDisciplina,
-                        principalTable: "PlanoEnsino",
-                        principalColumn: "CdDisciplina",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CursoPlanoEnsino",
                 columns: table => new
                 {
-                    CdCursoPlanoEnsino = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     CdCurso = table.Column<int>(nullable: false),
-                    CdDisciplina = table.Column<int>(nullable: false)
+                    CdDisciplina = table.Column<int>(nullable: false),
+                    CdCursoPlanoEnsino = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CursoPlanoEnsino", x => x.CdCursoPlanoEnsino);
+                    table.PrimaryKey("PK_CursoPlanoEnsino", x => new { x.CdCurso, x.CdDisciplina });
                     table.ForeignKey(
                         name: "FK_CursoPlanoEnsino_Curso_CdCurso",
                         column: x => x.CdCurso,
@@ -190,70 +190,70 @@ namespace PlanoEnsinoAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LivroPlanoEnsino",
+                columns: table => new
+                {
+                    CdLivro = table.Column<int>(nullable: false),
+                    CdDisciplina = table.Column<int>(nullable: false),
+                    CdLivroPlanoEnsino = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TpBibliografia = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LivroPlanoEnsino", x => new { x.CdLivro, x.CdDisciplina });
+                    table.ForeignKey(
+                        name: "FK_LivroPlanoEnsino_PlanoEnsino_CdDisciplina",
+                        column: x => x.CdDisciplina,
+                        principalTable: "PlanoEnsino",
+                        principalColumn: "CdDisciplina",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LivroPlanoEnsino_Livro_CdLivro",
+                        column: x => x.CdLivro,
+                        principalTable: "Livro",
+                        principalColumn: "CdLivro",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SugestaoPlanoEnsino",
                 columns: table => new
                 {
                     CdSugestaoPlanoEnsino = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CdDisciplina = table.Column<int>(nullable: false),
-                    DsDisciplina = table.Column<string>(nullable: true),
-                    DsPlanoEnsino = table.Column<string>(nullable: true),
-                    NrCreditos = table.Column<int>(nullable: false),
-                    NrHorasSala = table.Column<int>(nullable: false),
-                    NrHorasPP = table.Column<int>(nullable: false),
-                    AnoSemestre = table.Column<string>(nullable: true),
-                    DsEmenta = table.Column<string>(nullable: true),
-                    DsObjetivo = table.Column<string>(nullable: true),
-                    DsMTDGeral = table.Column<string>(nullable: true),
-                    DsObservecao = table.Column<string>(nullable: true),
-                    DsBiblioBasica = table.Column<string>(nullable: true),
-                    DsBiblioComplementar = table.Column<string>(nullable: true),
-                    DsSemana1 = table.Column<string>(nullable: true),
-                    DsSemana2 = table.Column<string>(nullable: true),
-                    DsSemana3 = table.Column<string>(nullable: true),
-                    DsSemana4 = table.Column<string>(nullable: true),
-                    DsSemana5 = table.Column<string>(nullable: true),
-                    DsSemana6 = table.Column<string>(nullable: true),
-                    DsSemana7 = table.Column<string>(nullable: true),
-                    DsSemana8 = table.Column<string>(nullable: true),
-                    DsSemana9 = table.Column<string>(nullable: true),
-                    DsSemana10 = table.Column<string>(nullable: true),
-                    DsSemana11 = table.Column<string>(nullable: true),
-                    DsSemana12 = table.Column<string>(nullable: true),
-                    DsSemana13 = table.Column<string>(nullable: true),
-                    DsSemana14 = table.Column<string>(nullable: true),
-                    DsSemana15 = table.Column<string>(nullable: true),
-                    DsSemana16 = table.Column<string>(nullable: true),
-                    DsSemana17 = table.Column<string>(nullable: true),
-                    DsSemana18 = table.Column<string>(nullable: true),
-                    DsSemana19 = table.Column<string>(nullable: true),
-                    DsSemana20 = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: true),
-                    DtAtualização = table.Column<DateTime>(nullable: false)
+                    DsSugestaoPlanoEnsino = table.Column<string>(nullable: true),
+                    DsInclusaoBasica = table.Column<string>(nullable: true),
+                    DsExclusaoBasica = table.Column<string>(nullable: true),
+                    DsInclusaoComplementar = table.Column<string>(nullable: true),
+                    DsExclusaoComplementar = table.Column<string>(nullable: true),
+                    DtCadastroSugestao = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
+                    PlanoEnsinoCdDisciplina = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SugestaoPlanoEnsino", x => x.CdSugestaoPlanoEnsino);
                     table.ForeignKey(
-                        name: "FK_SugestaoPlanoEnsino_PlanoEnsino_CdDisciplina",
-                        column: x => x.CdDisciplina,
+                        name: "FK_SugestaoPlanoEnsino_PlanoEnsino_PlanoEnsinoCdDisciplina",
+                        column: x => x.PlanoEnsinoCdDisciplina,
                         principalTable: "PlanoEnsino",
                         principalColumn: "CdDisciplina",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UsuarioPlanoEnsino",
                 columns: table => new
                 {
-                    CdUsuarioPlanoEnsino = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     CdUsuario = table.Column<int>(nullable: false),
-                    CdDisciplina = table.Column<int>(nullable: false)
+                    CdDisciplina = table.Column<int>(nullable: false),
+                    CdUsuarioPlanoEnsino = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsuarioPlanoEnsino", x => x.CdUsuarioPlanoEnsino);
+                    table.PrimaryKey("PK_UsuarioPlanoEnsino", x => new { x.CdUsuario, x.CdDisciplina });
                     table.ForeignKey(
                         name: "FK_UsuarioPlanoEnsino_PlanoEnsino_CdDisciplina",
                         column: x => x.CdDisciplina,
@@ -269,64 +269,41 @@ namespace PlanoEnsinoAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Avaliacao_CdDisciplina",
-                table: "Avaliacao",
-                column: "CdDisciplina",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CursoPlanoEnsino_CdCurso",
-                table: "CursoPlanoEnsino",
-                column: "CdCurso",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CursoPlanoEnsino_CdDisciplina",
                 table: "CursoPlanoEnsino",
-                column: "CdDisciplina",
-                unique: true);
+                column: "CdDisciplina");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LivroAutor_CdAutor",
                 table: "LivroAutor",
-                column: "CdAutor",
-                unique: true);
+                column: "CdAutor");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LivroAutor_CdLivro",
-                table: "LivroAutor",
-                column: "CdLivro",
-                unique: true);
+                name: "IX_LivroPlanoEnsino_CdDisciplina",
+                table: "LivroPlanoEnsino",
+                column: "CdDisciplina");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SugestaoPlanoEnsino_CdDisciplina",
+                name: "IX_SugestaoPlanoEnsino_PlanoEnsinoCdDisciplina",
                 table: "SugestaoPlanoEnsino",
-                column: "CdDisciplina",
-                unique: true);
+                column: "PlanoEnsinoCdDisciplina");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsuarioPlanoEnsino_CdDisciplina",
                 table: "UsuarioPlanoEnsino",
-                column: "CdDisciplina",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsuarioPlanoEnsino_CdUsuario",
-                table: "UsuarioPlanoEnsino",
-                column: "CdUsuario",
-                unique: true);
+                column: "CdDisciplina");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Avaliacao");
-
-            migrationBuilder.DropTable(
                 name: "CursoPlanoEnsino");
 
             migrationBuilder.DropTable(
                 name: "LivroAutor");
+
+            migrationBuilder.DropTable(
+                name: "LivroPlanoEnsino");
 
             migrationBuilder.DropTable(
                 name: "SugestaoPlanoEnsino");

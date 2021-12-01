@@ -10,13 +10,12 @@ namespace PlanoEnsinoAPI.Data
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
         public DbSet<Autor> Autor { get; set; }
-        public DbSet<Avaliacao> Avaliacao { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<CursoPlanoEnsino> CursoPlanoEnsino { get; set; }
         public DbSet<Livro> Livro { get; set; }
         public DbSet<LivroAutor> LivroAutor { get; set; }
+        public DbSet<LivroPlanoEnsino> LivroPlanoEnsino { get; set; }
         public DbSet<PlanoEnsino> PlanoEnsino { get; set; }
         public DbSet<SugestaoPlanoEnsino> SugestaoPlanoEnsino { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
@@ -30,21 +29,6 @@ namespace PlanoEnsinoAPI.Data
 
             builder.Entity<Autor>()
                 .Property(a => a.CdAutor).ValueGeneratedOnAdd();
-
-            builder.Entity<Avaliacao>()
-              .HasKey(a => a.CdAvaliacao);
-
-            builder.Entity<Avaliacao>()
-                .Property(a => a.CdAvaliacao).ValueGeneratedOnAdd();
-
-            builder.Entity<Avaliacao>()
-            .HasOne<PlanoEnsino>(s => s.PlanoEnsino)
-            .WithOne(p => p.Avaliacao)
-            .HasForeignKey<Avaliacao>(s => s.CdDisciplina);
-
-            builder.Entity<Avaliacao>()
-                .Property(a => a.Peso)
-                .HasColumnType("decimal(18,2)");
 
             builder.Entity<Curso>()
              .HasKey(c => c.CdCurso);
@@ -65,8 +49,7 @@ namespace PlanoEnsinoAPI.Data
              .HasKey(l => l.CdLivro);
 
             builder.Entity<Livro>()
-                .Property(l => l.CdLivro).ValueGeneratedOnAdd();
-
+              .Property(l => l.CdLivro).ValueGeneratedOnAdd();
 
             builder.Entity<LivroAutor>()
              .HasKey(c => c.CdLivroAutor);
@@ -75,7 +58,16 @@ namespace PlanoEnsinoAPI.Data
              .Property(c => c.CdLivroAutor).ValueGeneratedOnAdd();
 
             builder.Entity<LivroAutor>()
-                .HasKey(la => new { la.CdLivro, la.CdAutor });
+             .HasKey(la => new { la.CdLivro, la.CdAutor });
+            
+            builder.Entity<LivroPlanoEnsino>()
+             .HasKey(c => c.CdLivroPlanoEnsino);
+
+            builder.Entity<LivroPlanoEnsino>()
+             .Property(c => c.CdLivroPlanoEnsino).ValueGeneratedOnAdd();
+
+            builder.Entity<LivroPlanoEnsino>()
+             .HasKey(lp => new { lp.CdLivro, lp.CdDisciplina});
 
             builder.Entity<PlanoEnsino>()
             .HasKey(p => p.CdDisciplina);
@@ -83,11 +75,17 @@ namespace PlanoEnsinoAPI.Data
             builder.Entity<PlanoEnsino>()
              .Property(p => p.CdDisciplina).ValueGeneratedOnAdd();
 
+            builder.Entity<PlanoEnsino>()
+                .Property(p => p.DtAtualização).HasDefaultValueSql("getdate()");
+
             builder.Entity<SugestaoPlanoEnsino>()
             .HasKey(p => p.CdSugestaoPlanoEnsino);
 
             builder.Entity<SugestaoPlanoEnsino>()
             .Property(p => p.CdSugestaoPlanoEnsino).ValueGeneratedOnAdd();
+
+            builder.Entity<SugestaoPlanoEnsino>()
+                .Property(p => p.DtCadastroSugestao).HasDefaultValueSql("getdate()");
 
             builder.Entity<Usuario>()
                  .HasKey(u => u.CdUsuario);

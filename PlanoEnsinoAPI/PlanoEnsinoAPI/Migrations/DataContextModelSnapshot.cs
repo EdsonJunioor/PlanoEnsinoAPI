@@ -34,45 +34,6 @@ namespace PlanoEnsinoAPI.Migrations
                     b.ToTable("Autor");
                 });
 
-            modelBuilder.Entity("PlanoEnsinoAPI.Models.Avaliacao", b =>
-                {
-                    b.Property<int>("CdAvaliacao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CdDisciplina")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DsAluno")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsAvaliacao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsConsulta")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsConteudo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsObservacao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Peso")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("CdAvaliacao");
-
-                    b.HasIndex("CdDisciplina")
-                        .IsUnique();
-
-                    b.ToTable("Avaliacao");
-                });
-
             modelBuilder.Entity("PlanoEnsinoAPI.Models.Curso", b =>
                 {
                     b.Property<int>("CdCurso")
@@ -152,6 +113,29 @@ namespace PlanoEnsinoAPI.Migrations
                     b.ToTable("LivroAutor");
                 });
 
+            modelBuilder.Entity("PlanoEnsinoAPI.Models.LivroPlanoEnsino", b =>
+                {
+                    b.Property<int>("CdLivro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CdDisciplina")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CdLivroPlanoEnsino")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TpBibliografia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CdLivro", "CdDisciplina");
+
+                    b.HasIndex("CdDisciplina");
+
+                    b.ToTable("LivroPlanoEnsino");
+                });
+
             modelBuilder.Entity("PlanoEnsinoAPI.Models.PlanoEnsino", b =>
                 {
                     b.Property<int>("CdDisciplina")
@@ -162,10 +146,52 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<string>("AnoSemestre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsBiblioBasica")
+                    b.Property<string>("DsAlunoA1")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsBiblioComplementar")
+                    b.Property<string>("DsAlunoA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAlunoA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAlunoA4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAvaliacaoA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAvaliacaoA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAvaliacaoA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsAvaliacaoA4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConsultaA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConsultaA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConsultaA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConsultaA4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConteudoA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConteudoA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConteudoA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsConteudoA4")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DsDisciplina")
@@ -180,7 +206,19 @@ namespace PlanoEnsinoAPI.Migrations
                     b.Property<string>("DsObjetivo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsObservecao")
+                    b.Property<string>("DsObservacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsObservacaoA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsObservacaoA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsObservacaoA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DsObservacaoA4")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DsSemana1")
@@ -244,7 +282,21 @@ namespace PlanoEnsinoAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DtAtualização")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("NomeA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeA4")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NrCreditos")
                         .HasColumnType("int");
@@ -254,6 +306,18 @@ namespace PlanoEnsinoAPI.Migrations
 
                     b.Property<int>("NrHorasSala")
                         .HasColumnType("int");
+
+                    b.Property<string>("PesoA1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PesoA2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PesoA3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PesoA4")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -270,113 +334,31 @@ namespace PlanoEnsinoAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AnoSemestre")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CdDisciplina")
                         .HasColumnType("int");
 
-                    b.Property<string>("DsBiblioBasica")
+                    b.Property<string>("DsExclusaoBasica")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsBiblioComplementar")
+                    b.Property<string>("DsExclusaoComplementar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsDisciplina")
+                    b.Property<string>("DsInclusaoBasica")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsEmenta")
+                    b.Property<string>("DsInclusaoComplementar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsMTDGeral")
+                    b.Property<string>("DsSugestaoPlanoEnsino")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DsObjetivo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsObservecao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsPlanoEnsino")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana10")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana11")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana12")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana13")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana14")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana15")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana16")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana17")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana18")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana19")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana20")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana6")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana7")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana8")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DsSemana9")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DtAtualização")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NrCreditos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NrHorasPP")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NrHorasSala")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DtCadastroSugestao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<int?>("PlanoEnsinoCdDisciplina")
                         .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CdSugestaoPlanoEnsino");
 
@@ -432,15 +414,6 @@ namespace PlanoEnsinoAPI.Migrations
                     b.ToTable("UsuarioPlanoEnsino");
                 });
 
-            modelBuilder.Entity("PlanoEnsinoAPI.Models.Avaliacao", b =>
-                {
-                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
-                        .WithOne("Avaliacao")
-                        .HasForeignKey("PlanoEnsinoAPI.Models.Avaliacao", "CdDisciplina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PlanoEnsinoAPI.Models.CursoPlanoEnsino", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.Curso", "Curso")
@@ -449,7 +422,7 @@ namespace PlanoEnsinoAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", null)
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
                         .WithMany("CursoPlanoEnsinos")
                         .HasForeignKey("CdDisciplina")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -459,7 +432,7 @@ namespace PlanoEnsinoAPI.Migrations
             modelBuilder.Entity("PlanoEnsinoAPI.Models.LivroAutor", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.Autor", "Autor")
-                        .WithMany("LivroAutores")
+                        .WithMany("AutoresLivros")
                         .HasForeignKey("CdAutor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -471,10 +444,25 @@ namespace PlanoEnsinoAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PlanoEnsinoAPI.Models.LivroPlanoEnsino", b =>
+                {
+                    b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
+                        .WithMany("LivroPlanos")
+                        .HasForeignKey("CdDisciplina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlanoEnsinoAPI.Models.Livro", "Livro")
+                        .WithMany("LivroPlanos")
+                        .HasForeignKey("CdLivro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PlanoEnsinoAPI.Models.SugestaoPlanoEnsino", b =>
                 {
                     b.HasOne("PlanoEnsinoAPI.Models.PlanoEnsino", "PlanoEnsino")
-                        .WithMany()
+                        .WithMany("SugestaoPlanos")
                         .HasForeignKey("PlanoEnsinoCdDisciplina");
                 });
 

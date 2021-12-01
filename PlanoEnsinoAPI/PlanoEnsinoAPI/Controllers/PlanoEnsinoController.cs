@@ -70,22 +70,20 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        [HttpPut, Route("{id}")]
-        public async Task<IActionResult> EditarPlanoEnsino(int id, [FromBody] PlanoEnsino planoEnsinoModel)
+        [HttpPut]
+        public async Task<IActionResult> EditarPlano([FromBody] PlanoEnsino planoEnsinoModel)
         {
             try
             {
-                var retorno = await repository.GetPlanoEnsinoByIdAsync(id);
+                repository.Update(planoEnsinoModel);
 
-                if (retorno != null)
+                if (await repository.SaveChangesAsync())
                 {
-                    repository.Update(planoEnsinoModel);                    //para criar a sugestão PE podemos editao e nao passar o id no json
-                    await repository.SaveChangesAsync();
-                    return Ok("Plano de Ensino atualizado com sucesso.");
+                    return Ok("Plano de ensino atualizado com sucesso.");
                 }
                 else
                 {
-                    return NotFound("Plano de Ensino não encontrado.");
+                    return NotFound("Plano de ensino não encontrado.");
 
                 }
             }

@@ -93,33 +93,27 @@ namespace PlanoEnsinoAPI.Controllers
             }
         }
 
-        public async Task<ActionResult> SalvarLivroAutor(LivroAutor livroAutorModel)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ApagarLivro(int id)
         {
             try
             {
-                var livro = await repository.GetLivroByIdAsync(livroAutorModel.CdLivro);
-                var autor = await repository.GetAutorByIdAsync(livroAutorModel.CdAutor);
-                if(livro != null && autor != null)
-                {
-                    repository.Add(livroAutorModel);
+                Livro livroObj = new Livro() { CdLivro = id };
 
-                    if (await repository.SaveChangesAsync())
-                    {
-                        return Ok(livroAutorModel);
-                    }
-                    else
-                    {
-                        return BadRequest("Erro ao salvar cdLivro e cdAutor.");
-                    }
+                repository.Delete(livroObj);
+
+                if (await repository.SaveChangesAsync())
+                {
+                    return Ok(id);
                 }
                 else
                 {
-                    return BadRequest("Erro ao salvar cdLivro e cdAutor, algum registro está nulo.");
+                    return BadRequest("Erro ao apagar livro.");
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest($"Erro exception:{e.Message}");
+                return BadRequest($"Erro:{ex.Message}");
             }
         }
     }
